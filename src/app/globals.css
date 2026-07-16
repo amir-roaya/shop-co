@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+    font-family: "IntegralCF Bold";
+    src: local("IntegralCF Bold"), url("../../public/fonts/IntegralCF-Bold.woff2") format("woff2");
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+    font-family: "Satoshi Bold";
+    src: local("Satoshi Bold"), url("../../public/fonts/Satoshi-Bold.woff2") format("woff2");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+    font-family: "Satoshi Regular";
+    src: local("Satoshi Regular"), url("../../public/fonts/Satoshi-Regular.woff2") format("woff2");
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme {
+    --font-integral-cf: "IntegralCF Bold";
+    --font-satoshi-bold: "Satoshi Bold";
+    --color-text-secondary: #00000094;
+    --color-bg-secondary: #F0F0F0;
+    --color-line-color-primary: #0000001e;
+    --color-border-color-primary: #00000013;
+    --shadow-main-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    --shadow-line-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+}
+
+@layer base {
+    body {
+        font-family: "Satoshi Regular";
+    }
+
+    svg {
+        @apply w-6 h-6;
+    }
+
+    button {
+        cursor: pointer;
+    }
+}
+
+@layer components {
+    .container {
+        @apply mx-auto px-4;
+    }
+
+    .hero-secttion {
+        background: url("../../public/images/hero.png") center no-repeat;
+        width: 100%;
+        height: 449px;
+    }
+
+    .dress-section {
+        background: url("../../public/images/mens.png") center no-repeat;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+    }
+
+    .line {
+        @apply border-r border-line-color-primary;
+    }
+
+    .comment {
+        @apply flex flex-col p-5 border gap-2.5 border-border-color-primary rounded-2xl min-w-74 lg:min-w-100 lg:p-8 shadow-main-shadow;
+    }
+
+    .header-line {
+        @apply border-t border-border-color-primary mb-6 shadow-line-shadow;
+    }
+
+    .login-hero {
+        @apply w-full h-125 rounded-lg overflow-hidden;
+        background: url("../../public/images/login-hero.png") center no-repeat;
+        background-size: cover;
+    }
+}
+
+@utility dress-grid {
+    grid-template-columns: 1fr;
+}
+
+@utility dress-grid-desktop {
+    grid-template-columns: 1fr 2fr;
+}
+
+@utility dress-grid-desktop-reverse {
+    grid-template-columns: 2fr 1fr;
+}
+
+@utility products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+}
+
+@utility products-grid-desktop {
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+}
+
+@layer utilities {
+    .current-page {
+        @apply bg-bg-secondary text-black;
+    }
 }

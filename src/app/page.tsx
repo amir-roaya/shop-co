@@ -1,65 +1,336 @@
+import ProductCarousel from "@/components/products/ProductCarousel";
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main>
+      <section className="bg-bg-secondary pt-7">
+        <div className="container">
+          <div className="flex flex-col gap-2 md:flex-row">
+            <div className="flex flex-col gap-6 md:w-[50%] lg:gap-8">
+              <h1 className="font-integral-cf text-4xl 2xl:text-5xl">
+                FIND CLOTHES THAT MATCHES YOUR STYLE
+              </h1>
+
+              <p className="text-text-secondary 2xl:text-xl">
+                Browse through our diverse range of meticulously crafted
+                garments, designed to bring out your individuality and cater to
+                your sense of style.
+              </p>
+
+              <Link
+                href={"#"}
+                className="w-full py-3.5 text-center bg-black text-white rounded-4xl md:w-[40%]"
+              >
+                Shop Now
+              </Link>
+
+              <div className="flex flex-wrap shrink-0 gap-x-5 gap-y-4 min-[480px]:gap-x-3 justify-center lg:justify-start">
+                <div className="flex flex-col px-2">
+                  <span className="font-satoshi-bold text-2xl">200+</span>
+                  <span className="text-text-secondary text-xs md:text-sm">
+                    International Brands
+                  </span>
+                </div>
+
+                <div className="line"></div>
+
+                <div className="flex flex-col px-2">
+                  <span className="font-satoshi-bold text-2xl">2,000+</span>
+                  <span className="text-text-secondary text-xs md:text-sm">
+                    High-Quality Products
+                  </span>
+                </div>
+
+                <div className="line hidden min-[480px]:block md:hidden lg:block"></div>
+
+                <div className="flex flex-col px-2">
+                  <span className="font-satoshi-bold text-2xl">30,000+</span>
+                  <span className="text-text-secondary text-xs md:text-sm">
+                    Happy Customers
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="hero-secttion relative md:w-[50%]">
+              <div className="absolute right-[4%] min-[480px]:right-[14%] top-[1%] min-[480px]:top-[4%] md:right-[-2%] md:top-0">
+                <Image
+                  width={76}
+                  height={76}
+                  alt="Hero Shape"
+                  src={"/images/shape.png"}
+                ></Image>
+              </div>
+
+              <div className="absolute left-[2%] min-[480px]:left-[10%] top-[34%] min-[480px]:top-[36%] md:left-[10%] md:top-[18%]">
+                <Image
+                  width={44}
+                  height={44}
+                  alt="Hero Shape"
+                  src={"/images/shape.png"}
+                ></Image>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="bg-black">
+          <div className="container flex items-center flex-wrap justify-center gap-x-8 gap-y-3 text-white py-5 text-xl font-satoshi-bold md:text-2xl md:justify-evenly">
+            <p>VERSACE</p>
+            <p>ZARA</p>
+            <p>GUCCI</p>
+            <p>PRADA</p>
+            <p>CALVIN KLEIN</p>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="pt-12">
+        <div className="container border-b border-line-color-primary pb-11 shadow-line-shadow">
+          <ProductCarousel title="NEW ARRIVALS" />
+        </div>
+      </section>
+
+      <section className="pt-12">
+        <div className="container">
+          <ProductCarousel title="top selling" />
+        </div>
+      </section>
+
+      <section className="pt-12">
+        <div className="container">
+          <div className="bg-bg-secondary pt-13 px-6 xl:px-8 rounded-2xl">
+            <h3 className="font-integral-cf text-3xl text-center">
+              BROWSE BY dress STYLE
+            </h3>
+
+            <div className="py-7 space-y-5 xl:py-11">
+              <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop">
+                <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
+                  <div className="dress-section"></div>
+
+                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[16%] xl:text-2xl">
+                    Casual
+                  </h6>
+                </div>
+
+                <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
+                  <div className="dress-section"></div>
+
+                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[16%] xl:text-2xl">
+                    Casual
+                  </h6>
+                </div>
+              </div>
+
+              <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop-reverse">
+                <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
+                  <div className="dress-section"></div>
+
+                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[16%] xl:text-2xl">
+                    Casual
+                  </h6>
+                </div>
+
+                <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
+                  <div className="dress-section"></div>
+
+                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[16%] xl:text-2xl">
+                    Casual
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="pt-12">
+        <div className="container">
+          <div className="flex justify-between items-end">
+            <h3 className="font-integral-cf text-3xl">OUR HAPPY CUSTOMERS</h3>
+
+            <div className="flex gap-4">
+              <button>
+                <svg>
+                  <use href="#arrow"></use>
+                </svg>
+              </button>
+
+              <button className="rotate-180">
+                <svg>
+                  <use href="#arrow"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-7 overflow-x-hidden">
+            <div className="flex gap-4 justify-center">
+              <div className="comment">
+                <div className="overflow-hidden">
+                  <div className="flex items-center gap-1">
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <h6 className="font-satoshi-bold">Sarah M.</h6>
+
+                  <span className="bg-green-600 rounded-full p-0.5">
+                    <svg className="w-3.5 h-3.5 text-white">
+                      <use href="#check"></use>
+                    </svg>
+                  </span>
+                </div>
+
+                <p className="text-text-secondary text-sm lg:text-[16px]">
+                  &quot;I&apos;m blown away by the quality and style of the
+                  clothes I received from Shop.co. From casual wear to elegant
+                  dresses, every piece I&apos;ve bought has exceeded my
+                  expectations.&quot;
+                </p>
+              </div>
+
+              <div className="comment">
+                <div className="overflow-hidden">
+                  <div className="flex items-center gap-1">
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <h6 className="font-satoshi-bold">Sarah M.</h6>
+
+                  <span className="bg-green-600 rounded-full p-0.5">
+                    <svg className="w-3.5 h-3.5 text-white">
+                      <use href="#check"></use>
+                    </svg>
+                  </span>
+                </div>
+
+                <p className="text-text-secondary text-sm lg:text-[16px]">
+                  &quot;I&apos;m blown away by the quality and style of the
+                  clothes I received from Shop.co. From casual wear to elegant
+                  dresses, every piece I&apos;ve bought has exceeded my
+                  expectations.&quot;
+                </p>
+              </div>
+
+              <div className="comment">
+                <div className="overflow-hidden">
+                  <div className="flex items-center gap-1">
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-5 h-4.75">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <h6 className="font-satoshi-bold">Sarah M.</h6>
+
+                  <span className="bg-green-600 rounded-full p-0.5">
+                    <svg className="w-3.5 h-3.5 text-white">
+                      <use href="#check"></use>
+                    </svg>
+                  </span>
+                </div>
+
+                <p className="text-text-secondary text-sm lg:text-[16px]">
+                  &quot;I&apos;m blown away by the quality and style of the
+                  clothes I received from Shop.co. From casual wear to elegant
+                  dresses, every piece I&apos;ve bought has exceeded my
+                  expectations.&quot;
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
