@@ -1,8 +1,15 @@
 import ProductCarousel from "@/components/products/ProductCarousel";
+import { getProducts } from "@/services/products";
+import { getNewArrivals } from "@/utils/getNewArrivals";
+import { getTopSelling } from "@/utils/getTopSellings";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
+  const products = await getProducts();
+  const newArrivals = getNewArrivals(products);
+  const topSelling = getTopSelling(products);
+
   return (
     <main>
       <section className="bg-bg-secondary pt-7">
@@ -89,13 +96,13 @@ export default async function Home() {
 
       <section className="pt-12">
         <div className="container border-b border-line-color-primary pb-11 shadow-line-shadow">
-          <ProductCarousel title="NEW ARRIVALS" />
+          <ProductCarousel title="NEW ARRIVALS" products={newArrivals} />
         </div>
       </section>
 
       <section className="pt-12">
         <div className="container">
-          <ProductCarousel title="top selling" />
+          <ProductCarousel title="top selling" products={topSelling} />
         </div>
       </section>
 
