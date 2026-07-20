@@ -212,7 +212,7 @@ export default function page() {
                     name="promo-code"
                     type="text"
                     placeholder="Add promo code"
-                    className="text-sm outline-0 text-text-secondary"
+                    className="text-sm text-text-secondary"
                     autoComplete="promo-code"
                   />
                 </div>

@@ -74,9 +74,6 @@ export default function SvgSprite() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <rect
-          width="24"
-          height="24"
-          fill="white"
           style={{ mixBlendMode: "multiply" }}
         />
         <path d="M21 4.5H3V6H21V4.5Z" fill="black" />

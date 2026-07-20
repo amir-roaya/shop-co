@@ -22,7 +22,7 @@ export default function Footer() {
                 type="text"
                 name="newsletter"
                 placeholder="Enter your email address"
-                className="w-full h-full text-sm outline-0"
+                className="w-full h-full text-sm"
               />
             </div>
 

@@ -29,6 +29,7 @@
 @layer base {
     body {
         font-family: "Satoshi Regular";
+        overflow-x: clip;
     }
 
     svg {
@@ -38,11 +39,24 @@
     button {
         cursor: pointer;
     }
+
+    input {
+        outline: 0
+    }
+
+    label {
+        @apply cursor-pointer;
+    }
 }
 
 @layer components {
     .container {
         @apply mx-auto px-4;
+    }
+
+    .search-input {
+        @apply absolute right-0 top-[156%] text-sm bg-bg-secondary text-text-secondary p-0 rounded-3xl opacity-0 w-0 xl:hidden z-70;
+        box-shadow: 0px 54px 55px rgba(0, 0, 0, 0.25), 0px -12px 30px rgba(0, 0, 0, 0.12), 0px 4px 6px rgba(0, 0, 0, 0.12), 0px 12px 13px rgba(0, 0, 0, 0.17), 0px -3px 5px rgba(0, 0, 0, 0.09);
     }
 
     .hero-secttion {
@@ -75,6 +89,31 @@
         background: url("../../public/images/login-hero.png") center no-repeat;
         background-size: cover;
     }
+
+    .menu-cover {
+        @apply fixed inset-0 sm:hidden bg-[#0000006c] opacity-0 -z-1;
+    }
+
+    .filter-cover {
+        @apply fixed inset-0 md:hidden bg-[#0000006c] opacity-0 -z-1;
+    }
+
+    .sort-submenu {
+        background: linear-gradient(90deg, rgba(214, 214, 214, 1) 0%, rgba(26, 26, 26, 1) 100%);
+        @apply absolute text-white rounded-2xl p-4 w-50 right-0 top-[130%] flex items-center h-0 opacity-0 overflow-hidden;
+    }
+
+    .input-marker {
+        @apply w-11.5 bg-[#7a7a7a] h-6 rounded-full relative;
+    }
+
+    .input-marker::after {
+        @apply content-[""] block w-4 h-4 bg-white rounded-full absolute top-0 bottom-0 right-1 my-auto;
+    }
+
+    .price-input {
+        @apply absolute w-full appearance-none bg-transparent inset-y-0 my-auto pointer-events-none;
+    }
 }
 
 @utility dress-grid {
@@ -97,8 +136,48 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, auto));
 }
 
+@utility main-transition {
+    transition: all 200ms ease-in;
+}
+
 @layer utilities {
-    .current-page {
+    .current-pagination {
         @apply bg-bg-secondary text-black;
     }
+
+    .menu-transition {
+        transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    }
+
+    .show-menu {
+        @apply translate-x-[116%] opacity-100 min-[480px]:translate-x-[122%];
+    }
+
+    .menu-cover-show {
+        @apply opacity-100 z-80;
+    }
+
+    .show-search {
+        @apply w-54 opacity-100 p-3 lg:w-64;
+    }
+
+    .sort-submenu-show {
+        @apply h-53 opacity-100;
+    }
+
+    .filter-cover-show {
+        @apply opacity-100 z-110;
+    }
+
+    .show-dress-style {
+        @apply max-h-62 py-4 opacity-100;
+    }
+
+    .show-price-filter {
+        @apply max-h-22 py-11 opacity-100;
+    }
+}
+
+.price-input::-webkit-slider-thumb {
+    @apply appearance-none w-5.5 h-5.5 bg-black rounded-full cursor-pointer pointer-events-auto
 }

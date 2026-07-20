@@ -25,7 +25,7 @@ export default function page() {
                     type="text"
                     name="username"
                     placeholder="Username"
-                    className="border-b text-text-secondary border-line-color-primary shadow-line-shadow text-sm py-2 outline-0 pr-2 xl:py-3"
+                    className="border-b text-text-secondary border-line-color-primary shadow-line-shadow text-sm py-2 pr-2 xl:py-3"
                     autoComplete="username"
                   />
 
@@ -33,7 +33,7 @@ export default function page() {
                     type="email"
                     name="email"
                     placeholder="Email"
-                    className="border-b text-text-secondary border-line-color-primary shadow-line-shadow text-sm py-2 outline-0 pr-2 xl:py-3"
+                    className="border-b text-text-secondary border-line-color-primary shadow-line-shadow text-sm py-2 pr-2 xl:py-3"
                     autoComplete="email"
                   />
 
@@ -42,7 +42,7 @@ export default function page() {
                       type="password"
                       name="password"
                       placeholder="Password"
-                      className=" text-text-secondary text-sm outline-0 w-full"
+                      className=" text-text-secondary text-sm w-full"
                       autoComplete="new-password"
                     />
 
