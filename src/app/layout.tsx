@@ -5,6 +5,7 @@ import SvgSprite from "@/components/ui/SvgSprite";
 import Header from "@/components/layout/header/Header";
 import Footer from "@/components/layout/Footer";
 import Overlay from "@/components/ui/Overlay";
+import CartProvider from "@/components/cart/CartProvider";
 
 export const metadata: Metadata = {
   title: "Shop Co",
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <CartProvider />
         <SvgSprite />
         <Header />
         {children}

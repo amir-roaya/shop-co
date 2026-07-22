@@ -1,4 +1,5 @@
 "use client";
+import { useCartStore } from "@/store/cartStore";
 import { useMenuStore } from "@/store/menuStore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -7,6 +8,8 @@ export default function NavBar() {
   const isMenuOpen = useMenuStore((state) => state.isMenuOpen);
   const toggleMenu = useMenuStore((state) => state.toggleMenu);
   const [isSearchOpen, setIsSerachOpen] = useState(false);
+
+  const cart = useCartStore((state) => state.cart);
 
   useEffect(() => {
     const handleClick = (e: PointerEvent) => {
@@ -124,10 +127,14 @@ export default function NavBar() {
           className={`${isSearchOpen ? "show-search" : ""} menu-transition search-input`}
         />
 
-        <Link href={"#"}>
+        <Link className="relative" href={"#"}>
           <svg>
             <use href="#shopping-cart"></use>
           </svg>
+
+          <span className="absolute text-xs bg-red-500 rounded-full w-3.5 h-3.5 flex justify-center items-center text-white top-[-16%] right-[54%]">
+            {String(cart.length)}
+          </span>
         </Link>
 
         <Link href={"#"}>

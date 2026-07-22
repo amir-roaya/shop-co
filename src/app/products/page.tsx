@@ -3,9 +3,17 @@ import MobileFilters from "@/components/products/MobileFilters";
 import ShowProducts from "@/components/products/ShowProducts";
 import SortFilter from "@/components/products/SortFilter";
 import { getProducts } from "@/services/products";
+import { ProductsSearchParams } from "@/types/product";
+import { filterProducts } from "@/utils/filterProducts";
 
-export default async function page() {
+export default async function page({
+  searchParams,
+}: {
+  searchParams: Promise<ProductsSearchParams>;
+}) {
   const products = await getProducts();
+  const params = await searchParams;
+  const filteredProducts = filterProducts(products, params);
 
   return (
     <main>
@@ -14,7 +22,7 @@ export default async function page() {
           <div className="header-line"></div>
 
           <div className="flex gap-4">
-            <div className="hidden md:flex flex-col border border-border-color-primary rounded-2xl basis-[25%] p-4 h-fit shadow-main-shadow">
+            <div className="hidden md:flex flex-col border border-border-color-primary rounded-2xl basis-[25%] p-4 h-138.5 shadow-main-shadow">
               <div className="flex justify-between items-center pb-5">
                 <h5 className="font-satoshi-bold">Filters</h5>
 
@@ -25,7 +33,7 @@ export default async function page() {
                 </div>
               </div>
 
-              <Filters />
+              <Filters radioName="desktop-category" />
             </div>
 
             <div className="basis-full md:basis-[75%]">
@@ -33,7 +41,7 @@ export default async function page() {
                 <h5 className="font-satoshi-bold text-2xl">Casual</h5>
 
                 <p className="text-text-secondary hidden sm:block">
-                  Showing 1-10 of 100 Products
+                  Showing 1-10 of {String(products.length)} Products
                 </p>
 
                 <MobileFilters />
@@ -41,11 +49,11 @@ export default async function page() {
                 <div className="text-sm hidden md:flex gap-2">
                   <span className="text-text-secondary">Sorted by:</span>
 
-                  <SortFilter />
+                  <SortFilter radioName="desktop-sort" />
                 </div>
               </div>
 
-              <ShowProducts products={products} />
+              <ShowProducts products={filteredProducts} />
 
               <div className="flex items-center pt-5 justify-between text-sm">
                 <button className="flex items-center gap-2 p-2 border border-border-color-primary rounded-xl">

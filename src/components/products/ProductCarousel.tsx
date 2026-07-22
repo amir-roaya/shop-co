@@ -20,7 +20,7 @@ export default function ProductCarousel({
             >
               <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
                 <Image
-                  src={`${image}`}
+                  src={image}
                   width={180}
                   height={180}
                   alt="Product image"
@@ -28,7 +28,7 @@ export default function ProductCarousel({
                 ></Image>
               </div>
 
-              <h5 title={`${title}`} className="font-satoshi-bold w-[90%] truncate">
+              <h5 title={title} className="font-satoshi-bold w-[90%] truncate">
                 {title}
               </h5>
 

@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 
-export default function SortFilter() {
+type SortFilterProps = {
+  radioName: string;
+};
+
+export default function SortFilter({ radioName }: SortFilterProps) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const [isSortOpen, setIsSortOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
-  const [selectedSort, setSelectedSort] = useState("All Sorts");
+  const selectedSort = searchParams.get("sort") ?? "All Sorts";
 
   useEffect(() => {
     const handleClick = (e: PointerEvent) => {
@@ -21,13 +29,22 @@ export default function SortFilter() {
     };
   });
 
+  const setSort = (event: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("sort", event.target.value);
+    router.push(`/products?${params.toString()}`);
+    setIsSortOpen(false);
+  };
+
   return (
     <div className="relative" ref={sortRef}>
       <button
         onClick={() => setIsSortOpen(!isSortOpen)}
         className="flex items-center gap-1 font-satoshi-bold w-full"
       >
-        <span title={selectedSort} className="md:w-16 truncate">{selectedSort}</span>
+        <span title={selectedSort} className="md:w-16 truncate">
+          {selectedSort}
+        </span>
 
         <div>
           <svg
@@ -46,10 +63,11 @@ export default function SortFilter() {
             <label className="flex items-center justify-between">
               <input
                 type="radio"
-                name="sort"
+                name={radioName}
                 className="hidden peer"
                 value={"All Sorts"}
-                onChange={(e) => setSelectedSort(e.target.value)}
+                checked={selectedSort === "All Sorts"}
+                onChange={(e) => setSort(e)}
               />
 
               <span className="peer-checked:text-black main-transition">
@@ -66,10 +84,11 @@ export default function SortFilter() {
             <label className="flex items-center justify-between">
               <input
                 type="radio"
-                name="sort"
+                name={radioName}
                 className="hidden peer"
                 value={"Most Popular"}
-                onChange={(e) => setSelectedSort(e.target.value)}
+                checked={selectedSort === "Most Popular"}
+                onChange={(e) => setSort(e)}
               />
 
               <span className="peer-checked:text-black main-transition">
@@ -86,14 +105,15 @@ export default function SortFilter() {
             <label className="flex items-center justify-between">
               <input
                 type="radio"
-                name="sort"
+                name={radioName}
                 className="hidden peer"
-                value={"Most Cheapest"}
-                onChange={(e) => setSelectedSort(e.target.value)}
+                value={"Cheapest"}
+                checked={selectedSort === "Cheapest"}
+                onChange={(e) => setSort(e)}
               />
 
               <span className="peer-checked:text-black main-transition">
-                Most Cheapest
+                Cheapest
               </span>
 
               <span className="opacity-0 peer-checked:opacity-100 main-transition">
@@ -106,14 +126,15 @@ export default function SortFilter() {
             <label className="flex items-center justify-between">
               <input
                 type="radio"
-                name="sort"
+                name={radioName}
                 className="hidden peer"
-                value={"Most Latest"}
-                onChange={(e) => setSelectedSort(e.target.value)}
+                value={"Latest"}
+                checked={selectedSort === "Latest"}
+                onChange={(e) => setSort(e)}
               />
 
               <span className="peer-checked:text-black main-transition">
-                Most Latest
+                Latest
               </span>
 
               <span className="opacity-0 peer-checked:opacity-100 main-transition">
@@ -126,10 +147,11 @@ export default function SortFilter() {
             <label className="flex items-center justify-between">
               <input
                 type="radio"
-                name="sort"
+                name={radioName}
                 className="hidden peer"
                 value={"Most Expensive"}
-                onChange={(e) => setSelectedSort(e.target.value)}
+                checked={selectedSort === "Most Expensive"}
+                onChange={(e) => setSort(e)}
               />
 
               <span className="peer-checked:text-black main-transition">

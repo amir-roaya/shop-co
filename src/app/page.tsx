@@ -110,42 +110,42 @@ export default async function Home() {
         <div className="container">
           <div className="bg-bg-secondary pt-13 px-6 xl:px-8 rounded-2xl">
             <h3 className="font-integral-cf text-3xl text-center">
-              BROWSE BY dress STYLE
+              Browse by dress style
             </h3>
 
             <div className="py-7 space-y-5 xl:py-11">
               <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop">
                 <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
-                  <div className="dress-section"></div>
+                  <div className="dress-section bg-[url(/images/electronics.jpeg)]"></div>
 
-                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[16%] xl:text-2xl">
-                    Casual
+                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
+                    Electronics
                   </h6>
                 </div>
 
                 <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
-                  <div className="dress-section"></div>
+                  <div className="dress-section bg-[url(/images/womens.png)]"></div>
 
-                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[16%] xl:text-2xl">
-                    Casual
+                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
+                    Women&apos;s clothing
                   </h6>
                 </div>
               </div>
 
               <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop-reverse">
                 <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
-                  <div className="dress-section"></div>
+                  <div className="dress-section bg-[url(/images/mens.png)]"></div>
 
-                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[16%] xl:text-2xl">
-                    Casual
+                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
+                    Men&apos;s clothing
                   </h6>
                 </div>
 
                 <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
-                  <div className="dress-section"></div>
+                  <div className="dress-section bg-[url(/images/jewelery.jpg)]"></div>
 
-                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[16%] xl:text-2xl">
-                    Casual
+                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
+                    Jewelery
                   </h6>
                 </div>
               </div>

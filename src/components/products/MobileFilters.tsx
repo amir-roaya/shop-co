@@ -10,7 +10,7 @@ export default function MobileFilters() {
 
   return (
     <div className="md:hidden flex items-center gap-3 relative">
-      <SortFilter />
+      <SortFilter radioName="mobile-sort" />
 
       <button
         onClick={() => toggleFilters(true)}
@@ -34,7 +34,7 @@ export default function MobileFilters() {
           </button>
         </div>
 
-        <Filters />
+        <Filters radioName="mobile-category" />
       </div>
     </div>
   );

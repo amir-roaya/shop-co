@@ -1,20 +1,48 @@
 "use client";
 
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function Filters() {
-  const [isDressStyleOpen, setIsDressStyleOpen] = useState(false);
+type FiltersProps = {
+  radioName: string;
+};
+
+export default function Filters({ radioName }: FiltersProps) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [isDressStyleOpen, setIsDressStyleOpen] = useState(true);
+  const [category, setCategory] = useState(
+    searchParams.get("category") ?? "All",
+  );
+
+  const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(true);
 
   const MIN = 0;
-  const MAX = 250;
+  const MAX = 1000;
 
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(250);
+  const [minPrice, setMinPrice] = useState(
+    Number(searchParams.get("min") ?? 0),
+  );
+  const [maxPrice, setMaxPrice] = useState(
+    Number(searchParams.get("max") ?? 1000),
+  );
 
   const minPercent = ((minPrice - MIN) / (MAX - MIN)) * 100;
   const maxPercent = ((maxPrice - MIN) / (MAX - MIN)) * 100;
 
-  const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(false);
+  const applyFilter = () => {
+    const params = new URLSearchParams(searchParams);
+
+    params.set("category", category);
+    params.set("min", String(minPrice));
+    params.set("max", String(maxPrice));
+    
+    router.push(`/products?${params.toString()}`);
+
+    setIsDressStyleOpen(false);
+    setIsPriceFilterOpen(false);
+  };
 
   return (
     <>
@@ -41,13 +69,15 @@ export default function Filters() {
             <label className="flex items-center justify-between py-2">
               <input
                 type="radio"
-                name="dress-style"
+                name={radioName}
                 className="hidden peer"
-                value={"Casual"}
+                value={"All"}
+                checked={category === "All"}
+                onChange={(e) => setCategory(e.target.value)}
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold">
-                Casual
+                All
               </span>
 
               <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -58,13 +88,15 @@ export default function Filters() {
             <label className="flex items-center justify-between py-2">
               <input
                 type="radio"
-                name="dress-style"
+                name={radioName}
                 className="hidden peer"
-                value={"Casual"}
+                value={"electronics"}
+                checked={category === "electronics"}
+                onChange={(e) => setCategory(e.target.value)}
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold">
-                Casual
+                Electronics
               </span>
 
               <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -75,13 +107,15 @@ export default function Filters() {
             <label className="flex items-center justify-between py-2">
               <input
                 type="radio"
-                name="dress-style"
+                name={radioName}
                 className="hidden peer"
-                value={"Casual"}
+                value={"men's clothing"}
+                checked={category === "men's clothing"}
+                onChange={(e) => setCategory(e.target.value)}
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold">
-                Casual
+                Men&apos;s
               </span>
 
               <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -92,13 +126,15 @@ export default function Filters() {
             <label className="flex items-center justify-between py-2">
               <input
                 type="radio"
-                name="dress-style"
+                name={radioName}
                 className="hidden peer"
-                value={"Casual"}
+                value={"women's clothing"}
+                checked={category === "women's clothing"}
+                onChange={(e) => setCategory(e.target.value)}
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold">
-                Casual
+                Women&apos;s
               </span>
 
               <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -109,13 +145,15 @@ export default function Filters() {
             <label className="flex items-center justify-between py-2">
               <input
                 type="radio"
-                name="dress-style"
+                name={radioName}
                 className="hidden peer"
-                value={"Casual"}
+                value={"jewelery"}
+                checked={category === "jewelery"}
+                onChange={(e) => setCategory(e.target.value)}
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold">
-                Casual
+                Jewelery
               </span>
 
               <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -157,7 +195,7 @@ export default function Filters() {
             className={`price-input ${minPrice > maxPrice - 30 ? "z-20" : "z-10"}`}
             type="range"
             min={"0"}
-            max={"250"}
+            max={"1000"}
             value={minPrice}
             onChange={(e) => {
               const value = Number(e.target.value);
@@ -168,7 +206,7 @@ export default function Filters() {
             className="price-input z-10"
             type="range"
             min={"0"}
-            max={"250"}
+            max={"1000"}
             value={maxPrice}
             onChange={(e) => {
               const value = Number(e.target.value);
@@ -192,7 +230,7 @@ export default function Filters() {
             style={{
               left: `${maxPercent}%`,
               top: "64%",
-              transform: "translateX(-50%)",
+              transform: "translateX(-70%)",
             }}
           >
             ${maxPrice}
@@ -200,7 +238,10 @@ export default function Filters() {
         </div>
       </div>
 
-      <button className="w-full py-2 text-center bg-black text-white rounded-4xl text-sm lg:text-[18px] lg:py-3">
+      <button
+        onClick={() => applyFilter()}
+        className="w-full py-2 text-center bg-black text-white rounded-4xl text-sm lg:text-[18px] lg:py-3"
+      >
         Apply Filter
       </button>
     </>
