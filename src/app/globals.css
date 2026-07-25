@@ -54,9 +54,22 @@
         @apply mx-auto px-4;
     }
 
-    .search-input {
-        @apply absolute right-0 top-[156%] text-sm bg-bg-secondary text-text-secondary p-0 rounded-3xl opacity-0 w-0 xl:hidden z-70;
+    .search-input-wrapper {
+        @apply absolute right-0 top-[156%] z-70 text-text-secondary overflow-hidden bg-bg-secondary rounded-3xl opacity-0 w-0 xl:hidden;
         box-shadow: 0px 54px 55px rgba(0, 0, 0, 0.25), 0px -12px 30px rgba(0, 0, 0, 0.12), 0px 4px 6px rgba(0, 0, 0, 0.12), 0px 12px 13px rgba(0, 0, 0, 0.17), 0px -3px 5px rgba(0, 0, 0, 0.09);
+    }
+
+    .search-result {
+        @apply flex flex-col px-2 text-sm py-0 opacity-0 max-h-0 border-t overflow-y-auto overflow-x-hidden;
+    }
+
+    .desktop-search-wrapper {
+        @apply absolute right-0 top-[110%] z-70 bg-bg-secondary w-full rounded-3xl overflow-hidden;
+        box-shadow: 0px 54px 55px rgba(0, 0, 0, 0.25), 0px -12px 30px rgba(0, 0, 0, 0.12), 0px 4px 6px rgba(0, 0, 0, 0.12), 0px 12px 13px rgba(0, 0, 0, 0.17), 0px -3px 5px rgba(0, 0, 0, 0.09);
+    }
+
+    .desktop-search-result {
+        @apply flex flex-col py-0 px-3 max-h-0 overflow-y-auto opacity-0;
     }
 
     .hero-secttion {
@@ -149,12 +162,20 @@
         @apply translate-x-[116%] opacity-100 min-[480px]:translate-x-[122%];
     }
 
-    .menu-cover-show {
-        @apply opacity-100 z-80;
+    .show-search {
+        @apply w-54 opacity-100 lg:w-64 p-1;
     }
 
-    .show-search {
-        @apply w-54 opacity-100 p-3 lg:w-64;
+    .show-search-result {
+        @apply max-h-50 opacity-100 py-3;
+    }
+
+    .show-desktop-search-result {
+        @apply py-4 max-h-55 opacity-100;
+    }
+
+    .menu-cover-show {
+        @apply opacity-100 z-80;
     }
 
     .sort-submenu-show {
@@ -176,6 +197,24 @@
     .show-modal {
         @apply opacity-100 h-16;
     }
+}
+
+.search-result::-webkit-scrollbar,
+.desktop-search-result::-webkit-scrollbar {
+    @apply appearance-none w-3
+}
+
+.search-result::-webkit-scrollbar-thumb, .desktop-search-result::-webkit-scrollbar-thumb {
+    @apply bg-[#161616] rounded-full
+}
+
+.search-result>*:not(:last-child), .desktop-search-result>*:not(:last-child) {
+    @apply pb-2.5 border-b border-border-color-primary shadow-line-shadow;
+}
+
+.search-result>*:not(:first-child),
+.desktop-search-result>*:not(:first-child) {
+    @apply pt-2.5;
 }
 
 .price-input::-webkit-slider-thumb {

@@ -13,6 +13,7 @@ type CartStore = {
   removeFromCart: (id: number, size: string) => void;
   increaseQuantity: (id: number, size: string) => void;
   decreaseQuantity: (id: number, size: string) => void;
+  clearCart: () => void;
 };
 
 export const useCartStore = create<CartStore>((set, get) => ({
@@ -75,5 +76,11 @@ export const useCartStore = create<CartStore>((set, get) => ({
       .filter((product) => product.quantity > 0);
     localStorage.setItem("cart", JSON.stringify(cart));
     set({ cart });
+  },
+
+  clearCart: () => {
+    localStorage.removeItem("cart");
+
+    set({ cart: [] });
   },
 }));

@@ -1,3 +1,5 @@
+"use server";
+
 import { Product } from "@/types/product";
 
 const API_URL = process.env.API_URL;

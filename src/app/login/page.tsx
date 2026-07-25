@@ -1,3 +1,7 @@
+import CopyButton from "@/components/login/CopyButton";
+import LoginForm from "@/components/login/LoginForm";
+import Link from "next/link";
+
 export default function page() {
   return (
     <main>
@@ -8,52 +12,43 @@ export default function page() {
           <div className="flex flex-col gap-5 md:flex-row">
             <div className="login-hero md:basis-[60%] md:h-150"></div>
 
-            <div className="flex md:basis-[40%] md:items-center">
-              <form className="flex flex-col gap-7 basis-full md:px-7 xl:px-16 xl:gap-10">
-                <div className="flex flex-col gap-2">
-                  <h2 className="font-satoshi-bold text-2xl">
-                    Log in to Exclusive
-                  </h2>
+            <div className="flex flex-col md:basis-[40%] gap-7 md:justify-center md:px-7 xl:px-16">
+              <LoginForm />
 
-                  <p className="text-sm">Enter your details below</p>
-                </div>
+              <div className="flex items-center justify-center gap-3 text-sm text-text-secondary">
+                <span>Dont have an account?</span>
 
-                <div className="flex flex-col gap-4 w-[90%] md:w-full">
-                  <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    className="border-b text-text-secondary border-line-color-primary shadow-line-shadow text-sm py-2 pr-2 xl:py-3"
-                    autoComplete="username"
-                  />
+                <Link
+                  className="font-satoshi-bold border-b shadow-line-shadow pb-0.5"
+                  href={"#"}
+                >
+                  Sign Up
+                </Link>
+              </div>
 
-                  <div className="flex items-center justify-between border-b border-line-color-primary shadow-line-shadow py-2 pr-2 xl:py-3 gap-1.5">
-                    <input
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      className=" text-text-secondary text-sm w-full"
-                      autoComplete="current-password"
-                    />
+              <div className="text-text-secondary flex flex-col gap-4 border border-border-color-primary py-5 px-4 rounded-3xl text-sm">
+                <h6>Demo Account</h6>
 
-                    <button>
-                      <svg className="w-4.5 h-4.5 text-text-secondary">
-                        <use href="#eye-slash"></use>
-                      </svg>
-                    </button>
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between">
+                    <p>
+                      Username:<span className="text-red-400"> johnd</span>
+                    </p>
+
+                    <CopyButton text="johnd" />
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <p>
+                      Password:<span className="text-red-400"> m38rmF$</span>
+                    </p>
+
+                    <CopyButton text="m38rmF$" />
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                  <button className="text-white bg-black py-3 w-full px-6 rounded-xl">
-                    Log In
-                  </button>
-
-                  <span className="text-text-secondary text-sm">
-                    Forget Password?
-                  </span>
-                </div>
-              </form>
+                <p>Use this account to explore the application.</p>
+              </div>
             </div>
           </div>
         </div>

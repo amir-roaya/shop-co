@@ -2,13 +2,16 @@ import { Product } from "@/types/product";
 import { getRatingWidth } from "@/utils/ratinng";
 import Image from "next/image";
 import ProductActions from "./ProductActions";
+import { cookies } from "next/headers";
 
 type ProductInfoProps = {
   product: Product;
 };
 
-export default function ProductInfo({ product }: ProductInfoProps) {
+export default async function ProductInfo({ product }: ProductInfoProps) {
   const { description, image, price, title, rating } = product;
+  const cookieStore = await cookies();
+  const isLoggedin = !!cookieStore.get("token");
 
   return (
     <div className="flex flex-col gap-4 md:flex-row md:gap-6">
@@ -83,7 +86,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           {description}
         </p>
 
-        <ProductActions product={product} />
+        <ProductActions product={product} isLoggedIn={isLoggedin} />
       </div>
     </div>
   );

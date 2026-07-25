@@ -23,11 +23,11 @@ export default function SortFilter({ radioName }: SortFilterProps) {
       }
     };
 
-    window.addEventListener("click", handleClick);
+    document.addEventListener("click", handleClick);
     return () => {
-      window.removeEventListener("click", handleClick);
+      document.removeEventListener("click", handleClick);
     };
-  });
+  },[]);
 
   const setSort = (event: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
     const params = new URLSearchParams(searchParams);

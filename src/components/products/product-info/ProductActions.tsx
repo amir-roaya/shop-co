@@ -3,15 +3,24 @@
 import Modal from "@/components/ui/Modal";
 import { useCartStore } from "@/store/cartStore";
 import { Product } from "@/types/product";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function ProductActions({ product }: { product: Product }) {
+export default function ProductActions({
+  product,
+  isLoggedIn,
+}: {
+  product: Product;
+  isLoggedIn: boolean;
+}) {
   const [size, setSize] = useState("Small");
   const [quatity, setQuantity] = useState(1);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const addToCart = useCartStore((state) => state.addToCart);
+
+  const router = useRouter();
 
   return (
     <>
@@ -103,8 +112,12 @@ export default function ProductActions({ product }: { product: Product }) {
 
         <button
           onClick={() => {
-            setIsModalOpen(true);
-            addToCart(product, size, quatity);
+            if (isLoggedIn) {
+              setIsModalOpen(true);
+              addToCart(product, size, quatity);
+            } else {
+              router.push("/login");
+            }
           }}
           className={`basis-2/3 py-3 xl:py-5 bg-black text-white rounded-3xl ${isModalOpen ? "cursor-not-allowed" : ""}`}
           disabled={isModalOpen}
@@ -113,7 +126,11 @@ export default function ProductActions({ product }: { product: Product }) {
         </button>
       </div>
 
-      <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <Modal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        massage="Added to cart successfully !"
+      />
     </>
   );
 }

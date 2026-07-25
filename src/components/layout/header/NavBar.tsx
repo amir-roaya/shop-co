@@ -1,15 +1,30 @@
 "use client";
+
+import { useDebounce } from "@/hooks/useDebounce";
 import { useCartStore } from "@/store/cartStore";
 import { useMenuStore } from "@/store/menuStore";
+import { Product } from "@/types/product";
+import { getSearchedProducts } from "@/utils/getSearchedProducts";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import LogoutButton from "./LogoutButton";
 
-export default function NavBar() {
+type NavBarProps = {
+  products: Product[];
+  isLoggedin: boolean;
+};
+
+export default function NavBar({ products, isLoggedin }: NavBarProps) {
   const isMenuOpen = useMenuStore((state) => state.isMenuOpen);
   const toggleMenu = useMenuStore((state) => state.toggleMenu);
-  const [isSearchOpen, setIsSerachOpen] = useState(false);
 
   const cart = useCartStore((state) => state.cart);
+
+  const [isSearchOpen, setIsSerachOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedSearch = useDebounce(searchValue, 500);
+  const searchInputRef = useRef<HTMLDivElement>(null);
+  const searchedProducts = getSearchedProducts(products, debouncedSearch);
 
   useEffect(() => {
     const handleClick = (e: PointerEvent) => {
@@ -20,7 +35,7 @@ export default function NavBar() {
       }
 
       if (!element.classList.contains("search-btn")) {
-        if (!element.classList.contains("search-input")) {
+        if (!searchInputRef.current?.contains(element as Node)) {
           setIsSerachOpen(false);
         }
       }
@@ -28,9 +43,9 @@ export default function NavBar() {
 
     document.addEventListener("click", handleClick);
     return () => {
-      window.removeEventListener("click", handleClick);
+      document.removeEventListener("click", handleClick);
     };
-  });
+  }, [toggleMenu]);
 
   return (
     <nav className="flex items-center justify-between py-5">
@@ -91,27 +106,55 @@ export default function NavBar() {
         </li>
       </ul>
 
-      <div
-        className="hidden xl:flex items-center gap-2 p-3 rounded-4xl bg-bg-secondary
-            text-text-secondary w-[36%]"
-      >
-        <div>
-          <svg>
-            <use href="#search"></use>
-          </svg>
+      <div className="hidden xl:flex text-text-secondary relative w-[36%]">
+        <div className="flex items-center gap-2 p-3 rounded-4xl bg-bg-secondary w-full">
+          <div>
+            <svg>
+              <use href="#search"></use>
+            </svg>
+          </div>
+
+          <input
+            type="text"
+            name="search"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="Search for products ..."
+            className="w-full"
+          />
         </div>
 
-        <input
-          type="text"
-          placeholder="Search for products..."
-          className="w-full"
-          name="search"
-        />
+        <div
+          className={`desktop-search-wrapper ${debouncedSearch.trim() !== "" ? "p-1.5" : "p-0"} main-transition`}
+        >
+          <ul
+            className={`desktop-search-result ${debouncedSearch.trim() !== "" ? "show-desktop-search-result" : ""} main-transition`}
+          >
+            {searchedProducts && searchedProducts.length > 0
+              ? searchedProducts.map(({ id, title }) => (
+                  <li key={id}>
+                    <Link
+                      className="block w-full truncate font-satoshi-bold"
+                      title={title}
+                      href={"#"}
+                    >
+                      {title}
+                    </Link>
+                  </li>
+                ))
+              : ""}
+          </ul>
+        </div>
       </div>
 
       <div className="flex items-center gap-3 min-[480px]:gap-5 sm:gap-3 relative">
         <button
-          onClick={() => setIsSerachOpen(!isSearchOpen)}
+          onClick={() => {
+            setIsSerachOpen(!isSearchOpen);
+            if (isSearchOpen) {
+              setSearchValue("");
+            }
+          }}
           type="button"
           className="xl:hidden"
         >
@@ -120,28 +163,59 @@ export default function NavBar() {
           </svg>
         </button>
 
-        <input
-          type="text"
-          name="search"
-          placeholder="Search for products ..."
-          className={`${isSearchOpen ? "show-search" : ""} menu-transition search-input`}
-        />
+        <div
+          ref={searchInputRef}
+          className={`search-input-wrapper ${isSearchOpen ? "show-search" : ""} menu-transition p-0`}
+        >
+          <input
+            type="text"
+            name="search"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="Search for products ..."
+            className={`${isSearchOpen ? "p-3" : "p-0"} menu-transition w-full text-sm`}
+          />
+
+          <ul
+            className={`search-result main-transition ${debouncedSearch.trim() !== "" ? "show-search-result border-border-color-primary" : "border-transparent"}`}
+          >
+            {searchedProducts && searchedProducts.length > 0
+              ? searchedProducts.map(({ id, title }) => (
+                  <li key={id}>
+                    <Link
+                      className="block w-full truncate font-satoshi-bold"
+                      title={title}
+                      href={"#"}
+                    >
+                      {title}
+                    </Link>
+                  </li>
+                ))
+              : ""}
+          </ul>
+        </div>
 
         <Link className="relative" href={"#"}>
           <svg>
             <use href="#shopping-cart"></use>
           </svg>
 
-          <span className="absolute text-xs bg-red-500 rounded-full w-3.5 h-3.5 flex justify-center items-center text-white top-[-16%] right-[54%]">
-            {String(cart.length)}
-          </span>
+          {isLoggedin && (
+            <span className="absolute text-xs bg-red-500 rounded-full w-3.5 h-3.5 flex justify-center items-center text-white top-[-16%] right-[54%]">
+              {String(cart.length)}
+            </span>
+          )}
         </Link>
 
-        <Link href={"#"}>
-          <svg>
-            <use href="#user-avatar"></use>
-          </svg>
-        </Link>
+        {isLoggedin ? (
+          <LogoutButton />
+        ) : (
+          <Link href={"#"}>
+            <svg>
+              <use href="#user-avatar"></use>
+            </svg>
+          </Link>
+        )}
       </div>
     </nav>
   );
