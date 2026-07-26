@@ -40,7 +40,7 @@ export default async function page({
           <div className="header-line"></div>
 
           <div className="flex gap-4">
-            <div className="hidden md:flex flex-col border border-border-color-primary rounded-2xl basis-[25%] p-4 h-138.5 shadow-main-shadow">
+            <div className="hidden md:flex flex-col border border-border-color-primary rounded-2xl basis-[25%] py-4 px-2.5 h-138.5 shadow-main-shadow">
               <div className="flex justify-between items-center pb-5">
                 <h5 className="font-satoshi-bold">Filters</h5>
 
@@ -67,7 +67,7 @@ export default async function page({
 
                 <MobileFilters />
 
-                <div className="text-sm hidden md:flex gap-2">
+                <div className="text-sm hidden md:flex gap-2 items-center">
                   <span className="text-text-secondary">Sorted by:</span>
 
                   <SortFilter radioName="desktop-sort" />

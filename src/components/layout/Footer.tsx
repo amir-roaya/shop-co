@@ -34,7 +34,10 @@ export default function Footer() {
 
         <div className="border-b border-line-color-primary shadow-line-shadow flex flex-col gap-5 pb-10 md:flex-row md:justify-between md:items-start">
           <div className="flex flex-col gap-3 md:basis-[30%]">
-            <Link href={"#"} className="font-integral-cf text-2xl">
+            <Link
+              href={"#"}
+              className="font-integral-cf text-2xl main-transition rounded-2xl p-1.5 w-fit border border-transparent hover:border-main-hover"
+            >
               SHOP.CO
             </Link>
 

@@ -24,6 +24,7 @@
     --color-border-color-primary: #00000013;
     --shadow-main-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     --shadow-line-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+    --color-main-hover: #c5c5c5;
 }
 
 @layer base {
@@ -86,7 +87,7 @@
     }
 
     .comment {
-        @apply flex flex-col p-5 border gap-2.5 border-border-color-primary rounded-2xl min-w-74 lg:min-w-100 lg:p-8 shadow-main-shadow;
+        @apply flex flex-col p-3 sm:p-5 border gap-2.5 border-border-color-primary rounded-2xl min-w-65 lg:min-w-100 lg:p-8 shadow-main-shadow;
     }
 
     .header-line {
@@ -218,5 +219,11 @@
 }
 
 .price-input::-webkit-slider-thumb {
-    @apply appearance-none w-5.5 h-5.5 bg-black rounded-full cursor-pointer pointer-events-auto
+    @apply appearance-none w-5.5 h-5.5 bg-black rounded-full cursor-pointer pointer-events-auto main-transition;
+}
+
+@media (hover:hover) {
+    .price-input::-webkit-slider-thumb:hover {
+        @apply bg-gray-800;
+    }
 }

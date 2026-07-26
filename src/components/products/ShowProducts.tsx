@@ -1,6 +1,7 @@
 import { Product } from "@/types/product";
 import { getRatingWidth } from "@/utils/ratinng";
 import Image from "next/image";
+import Link from "next/link";
 
 type ShowProductsProps = {
   products: Product[];
@@ -21,9 +22,13 @@ export default function ShowProducts({ products }: ShowProductsProps) {
             ></Image>
           </div>
 
-          <h6 className="truncate font-satoshi-bold" title={title}>
+          <Link
+            href={`/products/${id}`}
+            className="truncate font-satoshi-bold main-transition hover:text-text-secondary"
+            title={title}
+          >
             {title}
-          </h6>
+          </Link>
 
           <div className="flex items-center gap-4">
             <div>

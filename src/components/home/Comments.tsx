@@ -21,6 +21,7 @@ export default function Comments() {
 
       step.current = cardWidth + cardGap;
 
+      trackRef.current.style.transition = "none";
       trackRef.current.style.transform = `translate3d(${-(currentIndex.current * step.current)}px,0,0)`;
     };
 
@@ -79,14 +80,20 @@ export default function Comments() {
       <div className="flex justify-between items-end">
         <h3 className="font-integral-cf text-3xl">OUR HAPPY CUSTOMERS</h3>
 
-        <div className="flex gap-4">
-          <button onClick={handlePrev}>
+        <div className="flex gap-3">
+          <button
+            onClick={handlePrev}
+            className="rounded-2xl p-0.5 main-transition hover:bg-black/70 hover:text-white"
+          >
             <svg>
               <use href="#arrow"></use>
             </svg>
           </button>
 
-          <button onClick={handleNext} className="rotate-180">
+          <button
+            onClick={handleNext}
+            className="rotate-180 rounded-2xl p-0.5 main-transition hover:bg-black/70 hover:text-white"
+          >
             <svg>
               <use href="#arrow"></use>
             </svg>
@@ -95,10 +102,7 @@ export default function Comments() {
       </div>
 
       <div className="mt-7 overflow-x-hidden">
-        <div
-          ref={trackRef}
-          className="flex gap-4"
-        >
+        <div ref={trackRef} className="flex gap-4">
           {[...fakeComments, ...fakeComments, ...fakeComments].map(
             ({ id, rate, name, description }, index) => (
               <div key={`${id}-${index}`} className="comment">

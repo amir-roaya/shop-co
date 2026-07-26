@@ -8,6 +8,7 @@ import { getSearchedProducts } from "@/utils/getSearchedProducts";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import LogoutButton from "./LogoutButton";
+import { usePathname } from "next/navigation";
 
 type NavBarProps = {
   products: Product[];
@@ -15,6 +16,8 @@ type NavBarProps = {
 };
 
 export default function NavBar({ products, isLoggedin }: NavBarProps) {
+  const pathname = usePathname();
+
   const isMenuOpen = useMenuStore((state) => state.isMenuOpen);
   const toggleMenu = useMenuStore((state) => state.toggleMenu);
 
@@ -25,6 +28,10 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
   const debouncedSearch = useDebounce(searchValue, 500);
   const searchInputRef = useRef<HTMLDivElement>(null);
   const searchedProducts = getSearchedProducts(products, debouncedSearch);
+
+  useEffect(() => {
+    toggleMenu(false);
+  }, [pathname, toggleMenu]);
 
   useEffect(() => {
     const handleClick = (e: PointerEvent) => {
@@ -49,7 +56,7 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
 
   return (
     <nav className="flex items-center justify-between py-5">
-      <div className="flex items-center gap-4 min-[480px]:gap-6 relative">
+      <div className="flex items-center gap-1 min-[480px]:gap-6 relative">
         <button
           onClick={() => toggleMenu(!isMenuOpen)}
           className="sm:hidden z-90 rounded-2xl flex relative"
@@ -72,7 +79,7 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
         >
           <ul className="flex flex-col gap-5 items-center text-lg">
             <li>
-              <Link href={"#"}>Home</Link>
+              <Link href={"/"}>Home</Link>
             </li>
             <li>
               <Link href={"#"}>Contact</Link>
@@ -81,28 +88,54 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
               <Link href={"#"}>About</Link>
             </li>
             <li>
-              <Link href={"#"}>Sign Up</Link>
+              <Link href={"/signup"}>Sign Up</Link>
             </li>
           </ul>
         </div>
 
-        <Link href={"#"} className="font-integral-cf text-xl">
+        <Link
+          href={"/"}
+          className="font-integral-cf text-lg min-[480px]:text-xl main-transition rounded-2xl p-1.5 border border-transparent hover:border-main-hover"
+        >
           SHOP.CO
         </Link>
       </div>
 
       <ul className="hidden gap-6 items-center sm:flex xl:gap-12">
         <li>
-          <Link href={"#"}>Home</Link>
+          <Link
+            className="flex flex-col items-center gap-0.5 after:content-[''] after:h-0.5 after:w-0 after:bg-main-hover hover:after:w-full after:main-transition"
+            href={"/"}
+          >
+            Home
+          </Link>
         </li>
+
         <li>
-          <Link href={"#"}>Contact</Link>
+          <Link
+            className="flex flex-col items-center gap-0.5 after:content-[''] after:h-0.5 after:w-0 after:bg-main-hover hover:after:w-full after:main-transition"
+            href={"#"}
+          >
+            Contact
+          </Link>
         </li>
+
         <li>
-          <Link href={"#"}>About</Link>
+          <Link
+            className="flex flex-col items-center gap-0.5 after:content-[''] after:h-0.5 after:w-0 after:bg-main-hover hover:after:w-full after:main-transition"
+            href={"#"}
+          >
+            About
+          </Link>
         </li>
+
         <li>
-          <Link href={"#"}>Sign Up</Link>
+          <Link
+            className="flex flex-col items-center gap-0.5 after:content-[''] after:h-0.5 after:w-0 after:bg-main-hover hover:after:w-full after:main-transition"
+            href={"/signup"}
+          >
+            Sign Up
+          </Link>
         </li>
       </ul>
 
@@ -134,9 +167,10 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
               ? searchedProducts.map(({ id, title }) => (
                   <li key={id}>
                     <Link
+                      onClick={() => setIsSerachOpen(false)}
                       className="block w-full truncate font-satoshi-bold"
                       title={title}
-                      href={"#"}
+                      href={`/products/${id}`}
                     >
                       {title}
                     </Link>
@@ -147,7 +181,7 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
         </div>
       </div>
 
-      <div className="flex items-center gap-3 min-[480px]:gap-5 sm:gap-3 relative">
+      <div className="flex items-center gap-1.5 min-[480px]:gap-3 relative">
         <button
           onClick={() => {
             setIsSerachOpen(!isSearchOpen);
@@ -156,7 +190,7 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
             }
           }}
           type="button"
-          className="xl:hidden"
+          className="xl:hidden main-transition hover:text-text-secondary"
         >
           <svg>
             <use className="search-btn" href="#search"></use>
@@ -183,9 +217,10 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
               ? searchedProducts.map(({ id, title }) => (
                   <li key={id}>
                     <Link
-                      className="block w-full truncate font-satoshi-bold"
+                      onClick={() => setIsSerachOpen(false)}
+                      className="block w-full truncate font-satoshi-bold main-transition hover:text-black"
                       title={title}
-                      href={"#"}
+                      href={`/products/${id}`}
                     >
                       {title}
                     </Link>
@@ -195,7 +230,10 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
           </ul>
         </div>
 
-        <Link className="relative" href={"#"}>
+        <Link
+          className="relative main-transition hover:text-text-secondary"
+          href={"/cart"}
+        >
           <svg>
             <use href="#shopping-cart"></use>
           </svg>
@@ -210,7 +248,10 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
         {isLoggedin ? (
           <LogoutButton />
         ) : (
-          <Link href={"#"}>
+          <Link
+            className="main-transition hover:text-text-secondary"
+            href={"/login"}
+          >
             <svg>
               <use href="#user-avatar"></use>
             </svg>

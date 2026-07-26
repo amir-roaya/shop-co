@@ -18,8 +18,8 @@ export default function page() {
                 <span>Already have account?</span>
 
                 <Link
-                  className="font-satoshi-bold border-b shadow-line-shadow pb-0.5"
-                  href={"#"}
+                  className="font-satoshi-bold border-b shadow-line-shadow pb-0.5 main-transition hover:text-main-hover"
+                  href={"login"}
                 >
                   Log in
                 </Link>

@@ -33,7 +33,7 @@ export default function Pagination({
             router.push(`?${params.toString()}`);
           }
         }}
-        className="flex items-center gap-2 p-2 border border-border-color-primary rounded-xl"
+        className="flex items-center gap-2 p-2 border border-border-color-primary rounded-xl main-transition hover:bg-black hover:text-white"
       >
         <div>
           <svg className="w-4 h-4">
@@ -44,7 +44,7 @@ export default function Pagination({
         <span>Previous</span>
       </button>
 
-      <div className="flex items-center text-text-secondary">
+      <div className="flex items-center gap-1 text-text-secondary">
         {pages.map((page) => (
           <button
             onClick={() => {
@@ -52,7 +52,7 @@ export default function Pagination({
               router.push(`?${params.toString()}`);
             }}
             key={page}
-            className={`py-1 px-2.75 rounded-lg main-transition ${currentPage === page ? "current-pagination" : ""}`}
+            className={`md:py-1 px-1.75 md:px-2.75 rounded-lg border border-transparent main-transition ${currentPage === page ? "current-pagination" : ""} hover:border-main-hover`}
           >
             {page}
           </button>
@@ -69,7 +69,7 @@ export default function Pagination({
             router.push(`?${params.toString()}`);
           }
         }}
-        className="flex items-center gap-2 p-2 border border-border-color-primary rounded-xl"
+        className="flex items-center gap-2 p-2 border border-border-color-primary rounded-xl main-transition hover:bg-black hover:text-white"
       >
         <span>Next</span>
 

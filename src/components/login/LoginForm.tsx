@@ -69,10 +69,11 @@ export default function LoginForm() {
           />
 
           <button
+          className="main-transition text-text-secondary hover:text-black"
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
           >
-            <svg className="w-4.5 h-4.5 text-text-secondary">
+            <svg className="w-4.5 h-4.5">
               <use href={`#${showPassword ? "eye" : "eye-slash"}`}></use>
             </svg>
           </button>
@@ -84,7 +85,7 @@ export default function LoginForm() {
       </div>
 
       <button
-        className="bg-black text-white py-3 rounded-xl px-6 w-full"
+        className="bg-black text-white py-3 rounded-xl border px-6 w-full main-transition hover:bg-bg-secondary hover:text-black"
         type="submit"
       >
         Log In

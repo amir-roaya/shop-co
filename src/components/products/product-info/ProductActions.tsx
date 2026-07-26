@@ -27,7 +27,7 @@ export default function ProductActions({
       <div className="border-b border-border-color-primary shadow-line-shadow pt-3 pb-8 md:pt-1 md:pb-5 xl:pb-10 xl:pt-5 2xl:pb-12 2xl:pt-5 flex flex-col gap-4">
         <h6 className="text-text-secondary">Choose Size</h6>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1 sm:gap-3">
           <label>
             <input
               type="radio"
@@ -38,7 +38,7 @@ export default function ProductActions({
               defaultChecked
             />
 
-            <span className="bg-bg-secondary rounded-4xl py-3 px-4.5 text-xs text-text-secondary peer-checked:bg-black peer-checked:text-white cursor-pointer xl:text-lg main-transition">
+            <span className="bg-bg-secondary rounded-4xl py-2 px-3 sm:py-3 sm:px-4.5 text-xs text-text-secondary peer-checked:bg-black peer-checked:text-white cursor-pointer xl:text-lg main-transition border border-transparent hover:border-black">
               Small
             </span>
           </label>
@@ -52,7 +52,7 @@ export default function ProductActions({
               onChange={(e) => setSize(e.target.value)}
             />
 
-            <span className="bg-bg-secondary rounded-4xl py-3 px-4.5 text-xs text-text-secondary peer-checked:bg-black peer-checked:text-white cursor-pointer xl:text-lg main-transition">
+            <span className="bg-bg-secondary rounded-4xl py-2 px-3 sm:py-3 sm:px-4.5 text-xs text-text-secondary peer-checked:bg-black peer-checked:text-white cursor-pointer xl:text-lg main-transition border border-transparent hover:border-black">
               Medium
             </span>
           </label>
@@ -66,7 +66,7 @@ export default function ProductActions({
               onChange={(e) => setSize(e.target.value)}
             />
 
-            <span className="bg-bg-secondary rounded-4xl py-3 px-4.5 text-xs text-text-secondary peer-checked:bg-black peer-checked:text-white cursor-pointer xl:text-lg main-transition">
+            <span className="bg-bg-secondary rounded-4xl py-2 px-3 sm:py-3 sm:px-4.5 text-xs text-text-secondary peer-checked:bg-black peer-checked:text-white cursor-pointer xl:text-lg main-transition border border-transparent hover:border-black">
               Large
             </span>
           </label>
@@ -80,7 +80,7 @@ export default function ProductActions({
               onChange={(e) => setSize(e.target.value)}
             />
 
-            <span className="bg-bg-secondary rounded-4xl py-3 px-4.5 text-xs text-text-secondary peer-checked:bg-black peer-checked:text-white cursor-pointer xl:text-lg main-transition">
+            <span className="bg-bg-secondary rounded-4xl py-2 px-3 sm:py-3 sm:px-4.5 text-xs text-text-secondary peer-checked:bg-black peer-checked:text-white cursor-pointer xl:text-lg main-transition border border-transparent hover:border-black">
               X-Large
             </span>
           </label>
@@ -90,6 +90,7 @@ export default function ProductActions({
       <div className="flex items-center pt-4 md:pt-3 xl:pt-6 2xl:pt-8 gap-3">
         <div className="basis-1/3 flex items-center justify-between bg-bg-secondary py-3 xl:py-5 px-3.5 xl:px-4 rounded-3xl">
           <button
+            className="main-transition border rounded-sm p-0.5 border-transparent hover:border-black"
             onClick={() => {
               if (quatity > 1) {
                 setQuantity((prev) => prev - 1);
@@ -103,7 +104,10 @@ export default function ProductActions({
 
           <span className="xl:text-xl">{quatity}</span>
 
-          <button onClick={() => setQuantity((prev) => prev + 1)}>
+          <button
+            className="main-transition border rounded-sm p-0.5 border-transparent hover:border-black"
+            onClick={() => setQuantity((prev) => prev + 1)}
+          >
             <svg className="w-4 h-4 xl:w-6 xl:h-6">
               <use href="#plus"></use>
             </svg>
@@ -119,7 +123,7 @@ export default function ProductActions({
               router.push("/login");
             }
           }}
-          className={`basis-2/3 py-3 xl:py-5 bg-black text-white rounded-3xl ${isModalOpen ? "cursor-not-allowed" : ""}`}
+          className={`basis-2/3 py-3 xl:py-5 bg-black border text-white rounded-3xl ${isModalOpen ? "cursor-not-allowed" : ""} main-transition ${!isModalOpen ? "hover:bg-bg-secondary hover:text-black" : ""}`}
           disabled={isModalOpen}
         >
           Add to Cart

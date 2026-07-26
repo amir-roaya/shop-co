@@ -28,33 +28,39 @@ export default async function Home() {
               </p>
 
               <Link
-                href={"#"}
-                className="w-full py-3.5 text-center bg-black text-white rounded-4xl md:w-[40%]"
+                href={"/products"}
+                className="w-full py-3.5 text-center bg-black border text-white rounded-4xl md:w-[40%] main-transition hover:bg-white hover:text-black"
               >
                 Shop Now
               </Link>
 
-              <div className="flex flex-wrap shrink-0 gap-x-5 gap-y-4 min-[480px]:gap-x-3 justify-center lg:justify-start">
+              <div className="flex flex-wrap gap-x-2 gap-y-4 min-[480px]:gap-x-3 justify-center lg:justify-start">
                 <div className="flex flex-col px-2">
-                  <span className="font-satoshi-bold text-2xl">200+</span>
+                  <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
+                    200+
+                  </span>
                   <span className="text-text-secondary text-xs md:text-sm">
                     International Brands
                   </span>
                 </div>
 
-                <div className="line"></div>
+                <div className="line hidden min-[350px]:block"></div>
 
                 <div className="flex flex-col px-2">
-                  <span className="font-satoshi-bold text-2xl">2,000+</span>
+                  <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
+                    2,000+
+                  </span>
                   <span className="text-text-secondary text-xs md:text-sm">
                     High-Quality Products
                   </span>
                 </div>
 
-                <div className="line hidden min-[480px]:block md:hidden lg:block"></div>
+                <div className="line hidden min-[445px]:block md:hidden lg:block"></div>
 
                 <div className="flex flex-col px-2">
-                  <span className="font-satoshi-bold text-2xl">30,000+</span>
+                  <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
+                    30,000+
+                  </span>
                   <span className="text-text-secondary text-xs md:text-sm">
                     Happy Customers
                   </span>
@@ -116,39 +122,51 @@ export default async function Home() {
 
             <div className="py-7 space-y-5 xl:py-11">
               <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop">
-                <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
-                  <div className="dress-section bg-[url(/images/electronics.jpeg)]"></div>
+                <Link
+                  href={"/products?category=electronics"}
+                  className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
+                >
+                  <div className="dress-section bg-[url(/images/electronics.jpeg)] main-transition hover:"></div>
 
                   <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
                     Electronics
                   </h6>
-                </div>
+                </Link>
 
-                <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
+                <Link
+                  href={"/products?category=men's clothing"}
+                  className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
+                >
                   <div className="dress-section bg-[url(/images/womens.png)]"></div>
 
                   <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
                     Women&apos;s clothing
                   </h6>
-                </div>
+                </Link>
               </div>
 
               <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop-reverse">
-                <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
+                <Link
+                  href={"/products?category=women's clothing"}
+                  className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
+                >
                   <div className="dress-section bg-[url(/images/mens.png)]"></div>
 
                   <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
                     Men&apos;s clothing
                   </h6>
-                </div>
+                </Link>
 
-                <div className="relative h-60 xl:h-80 rounded-xl overflow-hidden">
+                <Link
+                  href={"/products?category=jewelery"}
+                  className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
+                >
                   <div className="dress-section bg-[url(/images/jewelery.jpg)]"></div>
 
                   <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
                     Jewelery
                   </h6>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

@@ -18,7 +18,7 @@ export default function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="bg-bg-secondary py-1.5 px-3 md:px-1 lg:px-3 text-center rounded-xl"
+      className="bg-bg-secondary py-1.5 px-3 md:px-1 lg:px-3 text-center rounded-xl border border-transparent hover:border-black main-transition"
       type="button"
     >
       {copied ? "Copied !" : "Copy"}

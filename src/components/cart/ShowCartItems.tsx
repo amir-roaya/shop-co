@@ -32,7 +32,10 @@ export default function ShowCartItems() {
                 {title}
               </h6>
 
-              <button onClick={() => removeFromCart(id, size)}>
+              <button
+                className="text-[#FF3333] main-transition hover:text-black"
+                onClick={() => removeFromCart(id, size)}
+              >
                 <svg className="w-5 h-5 sm:w-6 sm:h-6">
                   <use href="#trash"></use>
                 </svg>
@@ -48,8 +51,11 @@ export default function ShowCartItems() {
             <div className="flex items-center justify-between">
               <span className="font-satoshi-bold text-lg">${price}</span>
 
-              <div className="flex items-center justify-between bg-bg-secondary py-1.5 px-3.5 rounded-3xl w-30 sm:py-2.5">
-                <button onClick={() => decreaseQuantity(id, size)}>
+              <div className="flex items-center justify-between bg-bg-secondary py-1.5 sm:py-2.5 px-2 sm:px-3.5 rounded-3xl w-23 sm:w-32">
+                <button
+                  className="main-transition border rounded-sm p-0.5 border-transparent hover:border-black"
+                  onClick={() => decreaseQuantity(id, size)}
+                >
                   <svg className="w-4 h-4 sm:w-5 sm:h-5">
                     <use href="#minus"></use>
                   </svg>
@@ -57,7 +63,10 @@ export default function ShowCartItems() {
 
                 <span className="xl:text-xl">{quantity}</span>
 
-                <button onClick={() => increaseQuantity(id, size)}>
+                <button
+                  className="main-transition border rounded-sm p-0.5 border-transparent hover:border-black"
+                  onClick={() => increaseQuantity(id, size)}
+                >
                   <svg className="w-4 h-4 sm:w-5 sm:h-5">
                     <use href="#plus"></use>
                   </svg>

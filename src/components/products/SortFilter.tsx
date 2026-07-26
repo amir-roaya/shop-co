@@ -40,7 +40,7 @@ export default function SortFilter({ radioName }: SortFilterProps) {
     <div className="relative" ref={sortRef}>
       <button
         onClick={() => setIsSortOpen(!isSortOpen)}
-        className="flex items-center gap-1 font-satoshi-bold w-full"
+        className="flex items-center gap-1 font-satoshi-bold w-full rounded-2xl p-2 main-transition hover:bg-black/90 hover:text-white"
       >
         <span title={selectedSort} className="md:w-16 truncate">
           {selectedSort}
@@ -60,7 +60,7 @@ export default function SortFilter({ radioName }: SortFilterProps) {
       >
         <ul className="flex flex-col gap-4 w-full">
           <li>
-            <label className="flex items-center justify-between">
+            <label className="flex items-center justify-between main-transition hover:text-blue-700">
               <input
                 type="radio"
                 name={radioName}
@@ -81,7 +81,7 @@ export default function SortFilter({ radioName }: SortFilterProps) {
           </li>
 
           <li>
-            <label className="flex items-center justify-between">
+            <label className="flex items-center justify-between main-transition hover:text-blue-700">
               <input
                 type="radio"
                 name={radioName}
@@ -102,7 +102,7 @@ export default function SortFilter({ radioName }: SortFilterProps) {
           </li>
 
           <li>
-            <label className="flex items-center justify-between">
+            <label className="flex items-center justify-between main-transition hover:text-blue-700">
               <input
                 type="radio"
                 name={radioName}
@@ -123,7 +123,7 @@ export default function SortFilter({ radioName }: SortFilterProps) {
           </li>
 
           <li>
-            <label className="flex items-center justify-between">
+            <label className="flex items-center justify-between main-transition hover:text-blue-700">
               <input
                 type="radio"
                 name={radioName}
@@ -144,7 +144,7 @@ export default function SortFilter({ radioName }: SortFilterProps) {
           </li>
 
           <li>
-            <label className="flex items-center justify-between">
+            <label className="flex items-center justify-between main-transition hover:text-blue-700">
               <input
                 type="radio"
                 name={radioName}

@@ -31,8 +31,8 @@ export default function CartSumry() {
         <span className="font-satoshi-bold">${(subTotal + 15).toFixed(2)}</span>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div className="flex items-center bg-bg-secondary rounded-4xl px-3 py-3.5 gap-2 basis-[70%]">
+      <div className="flex items-center gap-1 sm:gap-3">
+        <div className="flex items-center bg-bg-secondary rounded-3xl px-2 sm:px-3 py-3.5 gap-2 w-[70%]">
           <div>
             <svg className="w-5 h-5">
               <use href="#tag"></use>
@@ -43,17 +43,17 @@ export default function CartSumry() {
             name="promo-code"
             type="text"
             placeholder="Add promo code"
-            className="text-sm text-text-secondary"
+            className="text-sm text-text-secondary w-full"
             autoComplete="promo-code"
           />
         </div>
 
-        <button className="bg-black text-white rounded-4xl px-3 py-3.5 text-sm basis-[30%]">
+        <button className="bg-black text-white rounded-3xl px-3 py-3.5 text-sm w-[30%]">
           Apply
         </button>
       </div>
 
-      <button className="flex items-center w-full justify-center bg-black text-white rounded-4xl py-3.5 gap-2">
+      <button className="flex items-center w-full justify-center bg-black text-white rounded-3xl py-3.5 gap-2">
         <span className="text-sm">Go to Checkout</span>
 
         <div>

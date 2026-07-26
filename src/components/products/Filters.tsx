@@ -37,7 +37,7 @@ export default function Filters({ radioName }: FiltersProps) {
     params.set("category", category);
     params.set("min", String(minPrice));
     params.set("max", String(maxPrice));
-    
+
     router.push(`/products?${params.toString()}`);
 
     setIsDressStyleOpen(false);
@@ -49,7 +49,7 @@ export default function Filters({ radioName }: FiltersProps) {
       <div className="border-t border-border-color-primary flex flex-col">
         <button
           onClick={() => setIsDressStyleOpen((prev) => !prev)}
-          className={`flex items-center justify-between main-transition ${isDressStyleOpen ? "pt-5" : "py-5"}`}
+          className={`flex items-center justify-between main-transition ${isDressStyleOpen ? "pt-5" : "py-5"} hover:text-main-hover`}
         >
           <span className="font-satoshi-bold">Dress Style</span>
 
@@ -66,7 +66,7 @@ export default function Filters({ radioName }: FiltersProps) {
           className={`flex flex-col gap-1 overflow-clip max-h-0 py-0 opacity-30 main-transition ${isDressStyleOpen ? "show-dress-style" : ""}`}
         >
           <li>
-            <label className="flex items-center justify-between py-2">
+            <label className="flex items-center justify-between py-2 border border-transparent main-transition rounded-2xl px-1 hover:border-main-hover">
               <input
                 type="radio"
                 name={radioName}
@@ -76,7 +76,7 @@ export default function Filters({ radioName }: FiltersProps) {
                 onChange={(e) => setCategory(e.target.value)}
               />
 
-              <span className="text-text-secondary peer-checked:font-extrabold">
+              <span className="text-text-secondary peer-checked:font-extrabold main-transition">
                 All
               </span>
 
@@ -85,7 +85,7 @@ export default function Filters({ radioName }: FiltersProps) {
           </li>
 
           <li>
-            <label className="flex items-center justify-between py-2">
+            <label className="flex items-center justify-between py-2 border border-transparent main-transition rounded-2xl px-1 hover:border-main-hover">
               <input
                 type="radio"
                 name={radioName}
@@ -95,7 +95,7 @@ export default function Filters({ radioName }: FiltersProps) {
                 onChange={(e) => setCategory(e.target.value)}
               />
 
-              <span className="text-text-secondary peer-checked:font-extrabold">
+              <span className="text-text-secondary peer-checked:font-extrabold main-transition">
                 Electronics
               </span>
 
@@ -104,7 +104,7 @@ export default function Filters({ radioName }: FiltersProps) {
           </li>
 
           <li>
-            <label className="flex items-center justify-between py-2">
+            <label className="flex items-center justify-between py-2 border border-transparent main-transition rounded-2xl px-1 hover:border-main-hover">
               <input
                 type="radio"
                 name={radioName}
@@ -114,7 +114,7 @@ export default function Filters({ radioName }: FiltersProps) {
                 onChange={(e) => setCategory(e.target.value)}
               />
 
-              <span className="text-text-secondary peer-checked:font-extrabold">
+              <span className="text-text-secondary peer-checked:font-extrabold main-transition">
                 Men&apos;s
               </span>
 
@@ -123,7 +123,7 @@ export default function Filters({ radioName }: FiltersProps) {
           </li>
 
           <li>
-            <label className="flex items-center justify-between py-2">
+            <label className="flex items-center justify-between py-2 border border-transparent main-transition rounded-2xl px-1 hover:border-main-hover">
               <input
                 type="radio"
                 name={radioName}
@@ -133,7 +133,7 @@ export default function Filters({ radioName }: FiltersProps) {
                 onChange={(e) => setCategory(e.target.value)}
               />
 
-              <span className="text-text-secondary peer-checked:font-extrabold">
+              <span className="text-text-secondary peer-checked:font-extrabold main-transition">
                 Women&apos;s
               </span>
 
@@ -142,7 +142,7 @@ export default function Filters({ radioName }: FiltersProps) {
           </li>
 
           <li>
-            <label className="flex items-center justify-between py-2">
+            <label className="flex items-center justify-between py-2 border border-transparent main-transition rounded-2xl px-1 hover:border-main-hover">
               <input
                 type="radio"
                 name={radioName}
@@ -152,7 +152,7 @@ export default function Filters({ radioName }: FiltersProps) {
                 onChange={(e) => setCategory(e.target.value)}
               />
 
-              <span className="text-text-secondary peer-checked:font-extrabold">
+              <span className="text-text-secondary peer-checked:font-extrabold main-transition">
                 Jewelery
               </span>
 
@@ -165,7 +165,7 @@ export default function Filters({ radioName }: FiltersProps) {
       <div className="border-t border-border-color-primary flex flex-col">
         <button
           onClick={() => setIsPriceFilterOpen((prev) => !prev)}
-          className={`flex items-center justify-between main-transition ${isPriceFilterOpen ? "pt-5" : "py-5"}`}
+          className={`flex items-center justify-between main-transition ${isPriceFilterOpen ? "pt-5" : "py-5"} hover:text-main-hover`}
         >
           <span className="font-satoshi-bold">Price</span>
 
