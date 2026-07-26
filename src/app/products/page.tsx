@@ -1,19 +1,37 @@
 import Filters from "@/components/products/Filters";
 import MobileFilters from "@/components/products/MobileFilters";
+import Pagination from "@/components/products/Pagination";
 import ShowProducts from "@/components/products/ShowProducts";
 import SortFilter from "@/components/products/SortFilter";
 import { getProducts } from "@/services/products";
 import { ProductsSearchParams } from "@/types/product";
 import { filterProducts } from "@/utils/filterProducts";
+import { redirect } from "next/navigation";
 
 export default async function page({
   searchParams,
 }: {
   searchParams: Promise<ProductsSearchParams>;
 }) {
+  const ITEMS_PER_PAGE = 6;
+
   const products = await getProducts();
   const params = await searchParams;
-  const filteredProducts = filterProducts(products, params);
+  const result = filterProducts(products, params, ITEMS_PER_PAGE);
+
+  if (result.currentPage !== Number(params.page)) {
+    const newParams = new URLSearchParams(params);
+    newParams.set("page", String(result.currentPage));
+    redirect(`/products?${newParams.toString()}`);
+  }
+
+  const startItem =
+    result.totalItems === 0 ? 0 : (result.currentPage - 1) * ITEMS_PER_PAGE + 1;
+
+  const endItem = Math.min(
+    result.currentPage * ITEMS_PER_PAGE,
+    result.totalItems,
+  );
 
   return (
     <main>
@@ -41,7 +59,10 @@ export default async function page({
                 <h5 className="font-satoshi-bold text-2xl">Casual</h5>
 
                 <p className="text-text-secondary hidden sm:block">
-                  Showing 1-10 of {String(products.length)} Products
+                  <span>
+                    Showing {String(startItem)}-{String(endItem)} of {""}
+                    {String(result.totalItems)} Products
+                  </span>
                 </p>
 
                 <MobileFilters />
@@ -53,44 +74,13 @@ export default async function page({
                 </div>
               </div>
 
-              <ShowProducts products={filteredProducts} />
+              <ShowProducts products={result.products} />
 
-              <div className="flex items-center pt-5 justify-between text-sm">
-                <button className="flex items-center gap-2 p-2 border border-border-color-primary rounded-xl">
-                  <div>
-                    <svg className="w-4 h-4">
-                      <use href="#arrow"></use>
-                    </svg>
-                  </div>
-
-                  <span>Previous</span>
-                </button>
-
-                <div className="flex items-center text-text-secondary">
-                  <button className="py-1 px-2.75 rounded-lg main-transition current-pagination">
-                    1
-                  </button>
-                  <button className="py-1 px-2.75 rounded-lg main-transition">
-                    2
-                  </button>
-                  <button className="py-1 px-2.75 rounded-lg main-transition">
-                    3
-                  </button>
-                  <button className="py-1 px-2.75 rounded-lg main-transition">
-                    4
-                  </button>
-                </div>
-
-                <button className="flex items-center gap-2 p-2 border border-border-color-primary rounded-xl">
-                  <span>Next</span>
-
-                  <div>
-                    <svg className="rotate-180 w-4 h-4">
-                      <use href="#arrow"></use>
-                    </svg>
-                  </div>
-                </button>
-              </div>
+              <Pagination
+                totalItems={result.totalItems}
+                itemPerPage={ITEMS_PER_PAGE}
+                currentPage={result.currentPage}
+              />
             </div>
           </div>
         </div>

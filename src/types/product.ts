@@ -18,7 +18,8 @@ export type ProductCarouselProps = {
 
 export type ProductsSearchParams = {
   category: string;
-  min: number;
-  max: number;
+  min: string;
+  max: string;
   sort: string;
+  page: string;
 };

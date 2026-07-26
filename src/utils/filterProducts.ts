@@ -1,12 +1,17 @@
 import { Product, ProductsSearchParams } from "@/types/product";
 
-export const filterProducts = (products: Product[], params: ProductsSearchParams) => {
+export const filterProducts = (
+  products: Product[],
+  params: ProductsSearchParams,
+  itemPerPage: number,
+) => {
   let filteredProducts = [...products];
   const filters = {
     category: params.category ?? "All",
     min: Number(params.min ?? 0),
     max: Number(params.max ?? 1000),
     sort: params.sort ?? "All Sorts",
+    page: Number(params.page ?? 1),
   };
 
   if (filters.category !== "All") {
@@ -43,5 +48,18 @@ export const filterProducts = (products: Product[], params: ProductsSearchParams
     }
   }
 
-  return filteredProducts;
+  const totalPages = Math.ceil(filteredProducts.length / itemPerPage);
+  const currentPage = Math.min(
+    Math.max(filters.page, 1),
+    Math.max(totalPages, 1),
+  );
+
+  const start = (currentPage - 1) * itemPerPage;
+  const paginatedProducts = filteredProducts.slice(start, start + itemPerPage);
+
+  return {
+    products: paginatedProducts,
+    totalItems: filteredProducts.length,
+    currentPage,
+  };
 };

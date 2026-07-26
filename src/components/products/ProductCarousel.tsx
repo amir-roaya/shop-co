@@ -1,23 +1,116 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { type ProductCarouselProps } from "@/types/product";
 import { getRatingWidth } from "@/utils/ratinng";
+import {
+  PointerEvent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 export default function ProductCarousel({
   title,
   products,
 }: ProductCarouselProps) {
-  return (
-    <>
-      <h3 className="font-integral-cf text-3xl text-center">{title}</h3>
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const prevTranslate = useRef(0);
+  const currentTranslate = useRef(0);
+  const listWidth = useRef(0);
 
-      <div className="py-10 overflow-x-hidden">
-        <div className="flex justify-center gap-5">
-          {products.map(({ id, image, price, rating, title }) => (
-            <div
-              key={id}
-              className="flex flex-col gap-1.5 shrink-0 w-56 md:w-66 lg:w-78"
-            >
+  const trackRef = useRef<HTMLDivElement | null>(null);
+
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const check = () => {
+      setIsDesktop(window.innerWidth >= 1280);
+    };
+
+    check();
+
+    window.addEventListener("resize", check);
+    return () => {
+      window.removeEventListener("resize", check);
+    };
+  }, []);
+
+  const shouldUseCarousel = !isDesktop || products.length >= 5;
+
+  useLayoutEffect(() => {
+    const updateListWidth = () => {
+      if (!trackRef.current) return;
+
+      listWidth.current = trackRef.current.scrollWidth / 3;
+      currentTranslate.current = -listWidth.current;
+      prevTranslate.current = -listWidth.current;
+
+      trackRef.current.style.transform = `translate3d(${-listWidth.current}px,0,0)`;
+    };
+
+    updateListWidth();
+
+    window.addEventListener("resize", updateListWidth);
+    return () => {
+      window.removeEventListener("resize", updateListWidth);
+    };
+  }, []);
+
+  const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    isDragging.current = true;
+    startX.current = e.clientX;
+
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    if (!isDragging.current) return;
+
+    const delta = e.clientX - startX.current;
+    currentTranslate.current = prevTranslate.current + delta;
+
+    if (currentTranslate.current <= -(listWidth.current * 2)) {
+      currentTranslate.current += listWidth.current;
+      prevTranslate.current = currentTranslate.current;
+      startX.current = e.clientX;
+    }
+
+    if (currentTranslate.current > -listWidth.current) {
+      currentTranslate.current -= listWidth.current;
+      prevTranslate.current = currentTranslate.current;
+      startX.current = e.clientX;
+    }
+
+    if (trackRef.current) {
+      trackRef.current.style.userSelect = "none";
+      trackRef.current.style.pointerEvents = "none";
+    }
+
+    trackRef.current!.style.transform = `translate3d(${currentTranslate.current}px,0,0)`;
+  };
+
+  const handlePointerUp = () => {
+    isDragging.current = false;
+    prevTranslate.current = currentTranslate.current;
+
+    if (trackRef.current) {
+      trackRef.current.style.userSelect = "auto";
+      trackRef.current.style.pointerEvents = "auto";
+    }
+  };
+
+  if (!shouldUseCarousel) {
+    return (
+      <>
+        <h3 className="font-integral-cf text-3xl text-center">{title}</h3>
+
+        <div className="grid products-grid-desktop py-10 gap-5">
+          {products.map(({ id, image, price, rating, title }, index) => (
+            <div key={`${id}-${index}`} className="flex flex-col gap-1.5">
               <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
                 <Image
                   src={image}
@@ -28,9 +121,13 @@ export default function ProductCarousel({
                 ></Image>
               </div>
 
-              <h5 title={title} className="font-satoshi-bold w-[90%] truncate">
+              <Link
+                href={"#"}
+                title={title}
+                className="font-satoshi-bold w-[90%] truncate"
+              >
                 {title}
-              </h5>
+              </Link>
 
               <div className="flex items-center gap-4">
                 <div>
@@ -82,6 +179,112 @@ export default function ProductCarousel({
             </div>
           ))}
         </div>
+
+        <Link
+          className="block w-full mx-auto py-3.5 text-center border border-border-color-primary rounded-4xl md:w-[30%] xl:w-59 shadow-main-shadow"
+          href={"#"}
+        >
+          View All
+        </Link>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <h3 className="font-integral-cf text-3xl text-center">{title}</h3>
+
+      <div
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        className="py-10 overflow-x-hidden relative"
+      >
+        <div className="absolute left-0 top-0 w-20 h-full pointer-events-none bg-linear-[to_right,white,transparent] z-10"></div>
+
+        <div ref={trackRef} className="flex gap-5">
+          {[...products, ...products, ...products].map(
+            ({ id, image, price, rating, title }, index) => (
+              <div
+                key={`${id}-${index}`}
+                className="flex flex-col gap-1.5 shrink-0 w-56 md:w-66 lg:w-78"
+              >
+                <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
+                  <Image
+                    src={image}
+                    width={180}
+                    height={180}
+                    alt="Product image"
+                    className="max-h-full w-auto object-contain"
+                  ></Image>
+                </div>
+
+                <Link
+                  onClick={(e) => {
+                    if (isDragging.current) {
+                      e.preventDefault();
+                    }
+                  }}
+                  href={"#"}
+                  title={title}
+                  className="font-satoshi-bold w-[90%] truncate"
+                >
+                  {title}
+                </Link>
+
+                <div className="flex items-center gap-4">
+                  <div>
+                    <div
+                      style={{
+                        width: getRatingWidth(rating.rate),
+                      }}
+                      className="flex items-center gap-1 overflow-hidden"
+                    >
+                      <div>
+                        <svg className="w-3.75 h-3.5">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
+
+                      <div>
+                        <svg className="w-3.75 h-3.5">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
+
+                      <div>
+                        <svg className="w-3.75 h-3.5">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
+
+                      <div>
+                        <svg className="w-3.75 h-3.5">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
+
+                      <div>
+                        <svg className="w-3.75 h-3.5">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <span>{rating.rate}/</span>
+                    <span className="text-text-secondary">5</span>
+                  </div>
+                </div>
+
+                <span className="font-satoshi-bold">${price}</span>
+              </div>
+            ),
+          )}
+        </div>
+
+        <div className="absolute right-0 top-0 w-20 h-full pointer-events-none bg-linear-[to_left,white,transparent] z-10"></div>
       </div>
 
       <Link
