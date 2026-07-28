@@ -6,7 +6,7 @@ import SortFilter from "@/components/products/SortFilter";
 import { getProducts } from "@/services/products";
 import { ProductsSearchParams } from "@/types/product";
 import { filterProducts } from "@/utils/filterProducts";
-import { redirect } from "next/navigation";
+import { getValidFilters } from "@/utils/getValidFilters";
 
 export default async function page({
   searchParams,
@@ -17,13 +17,8 @@ export default async function page({
 
   const products = await getProducts();
   const params = await searchParams;
-  const result = filterProducts(products, params, ITEMS_PER_PAGE);
-
-  if (result.currentPage !== Number(params.page)) {
-    const newParams = new URLSearchParams(params);
-    newParams.set("page", String(result.currentPage));
-    redirect(`/products?${newParams.toString()}`);
-  }
+  const validFilters = getValidFilters(params);
+  const result = filterProducts(products, validFilters, ITEMS_PER_PAGE);
 
   const startItem =
     result.totalItems === 0 ? 0 : (result.currentPage - 1) * ITEMS_PER_PAGE + 1;
@@ -51,7 +46,10 @@ export default async function page({
                 </div>
               </div>
 
-              <Filters radioName="desktop-category" />
+              <Filters
+                validFilters={validFilters}
+                radioName="desktop-category"
+              />
             </div>
 
             <div className="basis-full md:basis-[75%]">
@@ -59,18 +57,25 @@ export default async function page({
                 <h5 className="font-satoshi-bold text-2xl">Casual</h5>
 
                 <p className="text-text-secondary hidden sm:block">
-                  <span>
-                    Showing {String(startItem)}-{String(endItem)} of {""}
-                    {String(result.totalItems)} Products
-                  </span>
+                  {result.products.length > 0 ? (
+                    <span>
+                      Showing {String(startItem)}-{String(endItem)} of {""}
+                      {String(result.totalItems)} Products
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </p>
 
-                <MobileFilters />
+                <MobileFilters validFilters={validFilters} />
 
                 <div className="text-sm hidden md:flex gap-2 items-center">
                   <span className="text-text-secondary">Sorted by:</span>
 
-                  <SortFilter radioName="desktop-sort" />
+                  <SortFilter
+                    validFilters={validFilters}
+                    radioName="desktop-sort"
+                  />
                 </div>
               </div>
 

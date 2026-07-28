@@ -1,35 +1,34 @@
 "use client";
 
+import { useFiltersStore } from "@/store/filtersMenuStore";
+import { Category, ValidFilters } from "@/types/product";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 type FiltersProps = {
   radioName: string;
+  validFilters: ValidFilters;
 };
 
-export default function Filters({ radioName }: FiltersProps) {
+export default function Filters({ radioName, validFilters }: FiltersProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const [isDressStyleOpen, setIsDressStyleOpen] = useState(true);
-  const [category, setCategory] = useState(
-    searchParams.get("category") ?? "All",
-  );
+  const [category, setCategory] = useState(validFilters.category);
 
   const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(true);
 
   const MIN = 0;
   const MAX = 1000;
 
-  const [minPrice, setMinPrice] = useState(
-    Number(searchParams.get("min") ?? 0),
-  );
-  const [maxPrice, setMaxPrice] = useState(
-    Number(searchParams.get("max") ?? 1000),
-  );
+  const [minPrice, setMinPrice] = useState(validFilters.min);
+  const [maxPrice, setMaxPrice] = useState(validFilters.max);
 
   const minPercent = ((minPrice - MIN) / (MAX - MIN)) * 100;
   const maxPercent = ((maxPrice - MIN) / (MAX - MIN)) * 100;
+
+  const toggleFilters = useFiltersStore((state) => state.toggleFilters);
 
   const applyFilter = () => {
     const params = new URLSearchParams(searchParams);
@@ -37,9 +36,11 @@ export default function Filters({ radioName }: FiltersProps) {
     params.set("category", category);
     params.set("min", String(minPrice));
     params.set("max", String(maxPrice));
+    params.set("page", "1");
 
     router.push(`/products?${params.toString()}`);
 
+    toggleFilters(false);
     setIsDressStyleOpen(false);
     setIsPriceFilterOpen(false);
   };
@@ -73,7 +74,9 @@ export default function Filters({ radioName }: FiltersProps) {
                 className="hidden peer"
                 value={"All"}
                 checked={category === "All"}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) =>
+                  setCategory(e.target.value as Category)
+                }
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold main-transition">
@@ -92,7 +95,9 @@ export default function Filters({ radioName }: FiltersProps) {
                 className="hidden peer"
                 value={"electronics"}
                 checked={category === "electronics"}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) =>
+                  setCategory(e.target.value as Category)
+                }
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold main-transition">
@@ -111,7 +116,9 @@ export default function Filters({ radioName }: FiltersProps) {
                 className="hidden peer"
                 value={"men's clothing"}
                 checked={category === "men's clothing"}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) =>
+                  setCategory(e.target.value as Category)
+                }
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold main-transition">
@@ -130,7 +137,9 @@ export default function Filters({ radioName }: FiltersProps) {
                 className="hidden peer"
                 value={"women's clothing"}
                 checked={category === "women's clothing"}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) =>
+                  setCategory(e.target.value as Category)
+                }
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold main-transition">
@@ -149,7 +158,9 @@ export default function Filters({ radioName }: FiltersProps) {
                 className="hidden peer"
                 value={"jewelery"}
                 checked={category === "jewelery"}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) =>
+                  setCategory(e.target.value as Category)
+                }
               />
 
               <span className="text-text-secondary peer-checked:font-extrabold main-transition">

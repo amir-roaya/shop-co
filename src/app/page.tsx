@@ -134,7 +134,7 @@ export default async function Home() {
                 </Link>
 
                 <Link
-                  href={"/products?category=men's clothing"}
+                  href={"/products?category=women's clothing"}
                   className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
                 >
                   <div className="dress-section bg-[url(/images/womens.png)]"></div>
@@ -147,7 +147,7 @@ export default async function Home() {
 
               <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop-reverse">
                 <Link
-                  href={"/products?category=women's clothing"}
+                  href={"/products?category=men's clothing"}
                   className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
                 >
                   <div className="dress-section bg-[url(/images/mens.png)]"></div>

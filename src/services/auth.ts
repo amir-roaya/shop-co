@@ -24,10 +24,22 @@ export const signup = async (
   return res.json();
 };
 
+type LoginService =
+  | {
+      success: false;
+      massage: string;
+    }
+  | {
+      success: true;
+      data: {
+        token: string;
+      };
+    };
+
 export const login = async (
   username: string,
   password: string,
-): Promise<{ token: "string" }> => {
+): Promise<LoginService> => {
   if (!API_URL) {
     throw new Error("API_URL is not defined");
   }
@@ -39,8 +51,14 @@ export const login = async (
   });
 
   if (!res.ok) {
-    throw new Error("Faild to login");
+    return {
+      success: false,
+      massage: await res.text(),
+    };
   }
 
-  return res.json();
+  return {
+    success: true,
+    data: await res.json(),
+  };
 };

@@ -9,6 +9,8 @@ export default function CartSumry() {
     0,
   );
 
+  if (!cart.length) return;
+
   return (
     <div className="flex flex-col border border-border-color-primary p-4 rounded-2xl gap-4 h-fit md:basis-[40%] xl:gap-5 shadow-main-shadow">
       <h5 className="font-satoshi-bold text-lg lg:text-xl">Order Summary</h5>

@@ -1,20 +1,25 @@
 "use client";
 
+import { ValidFilters } from "@/types/product";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 
 type SortFilterProps = {
   radioName: string;
+  validFilters: ValidFilters;
 };
 
-export default function SortFilter({ radioName }: SortFilterProps) {
+export default function SortFilter({
+  radioName,
+  validFilters,
+}: SortFilterProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const [isSortOpen, setIsSortOpen] = useState(false);
   const sortRef = useRef<HTMLDivElement>(null);
 
-  const selectedSort = searchParams.get("sort") ?? "All Sorts";
+  const selectedSort = validFilters.sort;
 
   useEffect(() => {
     const handleClick = (e: PointerEvent) => {
@@ -27,7 +32,7 @@ export default function SortFilter({ radioName }: SortFilterProps) {
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  },[]);
+  }, []);
 
   const setSort = (event: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
     const params = new URLSearchParams(searchParams);

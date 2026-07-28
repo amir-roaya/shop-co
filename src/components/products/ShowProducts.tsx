@@ -10,75 +10,83 @@ type ShowProductsProps = {
 export default function ShowProducts({ products }: ShowProductsProps) {
   return (
     <div className="py-6 grid products-grid gap-x-4 gap-y-4 border-b justify-center border-border-color-primary shadow-line-shadow lg:products-grid-desktop lg:gap-7">
-      {products.map(({ id, image, price, rating, title }) => (
-        <div key={id} className="flex flex-col gap-1">
-          <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
-            <Image
-              width={180}
-              height={180}
-              src={image}
-              alt="Product image"
-              className="max-h-full w-auto object-contain"
-            ></Image>
-          </div>
+      {products && (
+        products.length > 0 ? (
+          products.map(({ id, image, price, rating, title }) => (
+            <div key={id} className="flex flex-col gap-1">
+              <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
+                <Image
+                  width={180}
+                  height={180}
+                  src={image}
+                  alt="Product image"
+                  className="max-h-full w-auto object-contain"
+                ></Image>
+              </div>
 
-          <Link
-            href={`/products/${id}`}
-            className="truncate font-satoshi-bold main-transition hover:text-text-secondary"
-            title={title}
-          >
-            {title}
-          </Link>
-
-          <div className="flex items-center gap-4">
-            <div>
-              <div
-                style={{
-                  width: getRatingWidth(rating.rate),
-                }}
-                className="flex items-center gap-1 overflow-hidden"
+              <Link
+                href={`/products/${id}`}
+                className="truncate font-satoshi-bold main-transition hover:text-text-secondary"
+                title={title}
               >
+                {title}
+              </Link>
+
+              <div className="flex items-center gap-4">
                 <div>
-                  <svg className="w-3.75 h-3.5">
-                    <use href="#star"></use>
-                  </svg>
+                  <div
+                    style={{
+                      width: getRatingWidth(rating.rate),
+                    }}
+                    className="flex items-center gap-1 overflow-hidden"
+                  >
+                    <div>
+                      <svg className="w-3.75 h-3.5">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-3.75 h-3.5">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-3.75 h-3.5">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-3.75 h-3.5">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+
+                    <div>
+                      <svg className="w-3.75 h-3.5">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
 
                 <div>
-                  <svg className="w-3.75 h-3.5">
-                    <use href="#star"></use>
-                  </svg>
-                </div>
-
-                <div>
-                  <svg className="w-3.75 h-3.5">
-                    <use href="#star"></use>
-                  </svg>
-                </div>
-
-                <div>
-                  <svg className="w-3.75 h-3.5">
-                    <use href="#star"></use>
-                  </svg>
-                </div>
-
-                <div>
-                  <svg className="w-3.75 h-3.5">
-                    <use href="#star"></use>
-                  </svg>
+                  <span>{rating.rate}/</span>
+                  <span className="text-text-secondary">5</span>
                 </div>
               </div>
-            </div>
 
-            <div>
-              <span>{rating.rate}/</span>
-              <span className="text-text-secondary">5</span>
+              <span className="font-satoshi-bold">${price}</span>
             </div>
+          ))
+        ) : (
+          <div className="font-satoshi-bold text-black text-center text-2xl my-20">
+            No product found !
           </div>
-
-          <span className="font-satoshi-bold">${price}</span>
-        </div>
-      ))}
+        )
+      )}
     </div>
   );
 }

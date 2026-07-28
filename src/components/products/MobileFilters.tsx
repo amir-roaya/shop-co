@@ -3,14 +3,15 @@
 import { useFiltersStore } from "@/store/filtersMenuStore";
 import SortFilter from "./SortFilter";
 import Filters from "./Filters";
+import { ValidFilters } from "@/types/product";
 
-export default function MobileFilters() {
+export default function MobileFilters({ validFilters }: { validFilters: ValidFilters }) {
   const isFiltersOpen = useFiltersStore((state) => state.isFiltersOpen);
   const toggleFilters = useFiltersStore((state) => state.toggleFilters);
 
   return (
     <div className="md:hidden flex items-center gap-3 relative">
-      <SortFilter radioName="mobile-sort" />
+      <SortFilter validFilters={validFilters} radioName="mobile-sort" />
 
       <button
         onClick={() => toggleFilters(true)}
@@ -34,7 +35,7 @@ export default function MobileFilters() {
           </button>
         </div>
 
-        <Filters radioName="mobile-category" />
+        <Filters validFilters={validFilters} radioName="mobile-category" />
       </div>
     </div>
   );

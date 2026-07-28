@@ -9,6 +9,14 @@ export default function ShowCartItems() {
   const increaseQuantity = useCartStore((state) => state.increaseQuantity);
   const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
 
+  if (!cart.length) {
+    return (
+      <div className="font-satoshi-bold text-black text-center text-4xl mt-16">
+        Your cart is empty <span className="text-red-700">:(</span>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col border border-border-color-primary p-3 rounded-2xl gap-4 [&>*:not(:last-child)]:pb-4 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-border-color-primary h-fit [&>*:not(:last-child)]:shadow-line-shadow md:basis-[60%] shadow-main-shadow">
       {cart.map(({ id, size, image, title, price, quantity }) => (

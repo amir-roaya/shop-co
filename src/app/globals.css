@@ -25,6 +25,7 @@
     --shadow-main-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     --shadow-line-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
     --color-main-hover: #c5c5c5;
+    --animate-loading: blink 1s infinite linear;
 }
 
 @layer base {
@@ -95,7 +96,7 @@
     }
 
     .login-hero {
-        @apply w-full h-125 rounded-lg overflow-hidden;
+        @apply w-full h-125 rounded-lg overflow-hidden md:basis-[60%] md:h-180;
         background: url("../../public/images/login-hero.png") center no-repeat;
         background-size: cover;
     }
@@ -225,5 +226,21 @@
 @media (hover:hover) {
     .price-input::-webkit-slider-thumb:hover {
         @apply bg-gray-800;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    20% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }

@@ -10,7 +10,7 @@ export default function page() {
           <div className="header-line"></div>
 
           <div className="flex flex-col gap-5 md:flex-row">
-            <div className="login-hero md:basis-[60%] md:h-150"></div>
+            <div className="login-hero"></div>
 
             <div className="flex flex-col md:basis-[40%] gap-7 md:justify-center md:px-7 xl:px-16">
               <LoginForm />

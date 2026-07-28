@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "../ui/Modal";
 import { useRouter } from "next/navigation";
+import Loading from "../ui/Loading";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -15,7 +16,8 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
+    setError,
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
   });
@@ -26,13 +28,16 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginFormValues) => {
     const result = await loginAction(data);
 
-    if (result?.success) {
-      setIsModalOpen(true);
-
-      setTimeout(() => {
-        router.replace("/");
-      }, 2500);
+    if (!result.success) {
+      setError("root", { message: result.massage });
+      return;
     }
+
+    setIsModalOpen(true);
+
+    setTimeout(() => {
+      router.replace("/");
+    }, 2500);
   };
 
   return (
@@ -42,8 +47,7 @@ export default function LoginForm() {
     >
       <div className="flex flex-col gap-2">
         <h2 className="font-satoshi-bold text-2xl">Log in to Exclusive</h2>
-
-        <p className="text-sm">Enter your details below</p>
+        <p className="text-sm">Enter your details below</p>asdas
       </div>
 
       <div className="flex flex-col gap-3 w-full">
@@ -69,7 +73,7 @@ export default function LoginForm() {
           />
 
           <button
-          className="main-transition text-text-secondary hover:text-black"
+            className="main-transition text-text-secondary hover:text-black"
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
           >
@@ -85,11 +89,16 @@ export default function LoginForm() {
       </div>
 
       <button
-        className="bg-black text-white py-3 rounded-xl border px-6 w-full main-transition hover:bg-bg-secondary hover:text-black"
+        className={`bg-black text-white py-3 border rounded-xl px-6 w-full main-transition ${isSubmitting ? "cursor-not-allowed" : "hover:bg-bg-secondary hover:text-black"}`}
         type="submit"
+        disabled={isSubmitting}
       >
-        Log In
+        {isSubmitting ? <Loading textColor="white" /> : "Log In"}
       </button>
+
+      {errors.root && (
+        <p className="text-red-600 font-satoshi-bold">{errors.root.message}</p>
+      )}
 
       <Modal
         isModalOpen={isModalOpen}

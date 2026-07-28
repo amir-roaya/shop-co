@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import LogoutButton from "./LogoutButton";
 import { usePathname } from "next/navigation";
+import Loading from "@/components/ui/Loading";
 
 type NavBarProps = {
   products: Product[];
@@ -21,7 +22,7 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
   const isMenuOpen = useMenuStore((state) => state.isMenuOpen);
   const toggleMenu = useMenuStore((state) => state.toggleMenu);
 
-  const cart = useCartStore((state) => state.cart);
+  const store = useCartStore();
 
   const [isSearchOpen, setIsSerachOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -158,17 +159,18 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
         </div>
 
         <div
-          className={`desktop-search-wrapper ${debouncedSearch.trim() !== "" ? "p-1.5" : "p-0"} main-transition`}
+          className={`desktop-search-wrapper ${searchValue.trim() !== "" ? "p-1.5" : "p-0"} main-transition`}
         >
           <ul
-            className={`desktop-search-result ${debouncedSearch.trim() !== "" ? "show-desktop-search-result" : ""} main-transition`}
+            className={`desktop-search-result ${searchValue.trim() !== "" ? "show-desktop-search-result" : ""} main-transition`}
           >
-            {searchedProducts && searchedProducts.length > 0
-              ? searchedProducts.map(({ id, title }) => (
+            {searchedProducts ? (
+              searchedProducts.length > 0 ? (
+                searchedProducts.map(({ id, title }) => (
                   <li key={id}>
                     <Link
-                      onClick={() => setIsSerachOpen(false)}
-                      className="block w-full truncate font-satoshi-bold"
+                      onClick={() => setSearchValue("")}
+                      className="block w-full truncate font-satoshi-bold main-transition hover:text-black"
                       title={title}
                       href={`/products/${id}`}
                     >
@@ -176,7 +178,14 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
                     </Link>
                   </li>
                 ))
-              : ""}
+              ) : (
+                <li className="w-full font-satoshi-bold text-black">
+                  No product found !
+                </li>
+              )
+            ) : (
+              <Loading textColor="black" />
+            )}
           </ul>
         </div>
       </div>
@@ -211,13 +220,17 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
           />
 
           <ul
-            className={`search-result main-transition ${debouncedSearch.trim() !== "" ? "show-search-result border-border-color-primary" : "border-transparent"}`}
+            className={`search-result main-transition ${searchValue.trim() !== "" ? "show-search-result border-border-color-primary" : "border-transparent"}`}
           >
-            {searchedProducts && searchedProducts.length > 0
-              ? searchedProducts.map(({ id, title }) => (
+            {searchedProducts ? (
+              searchedProducts.length > 0 ? (
+                searchedProducts.map(({ id, title }) => (
                   <li key={id}>
                     <Link
-                      onClick={() => setIsSerachOpen(false)}
+                      onClick={() => {
+                        setSearchValue("");
+                        setIsSerachOpen(false);
+                      }}
                       className="block w-full truncate font-satoshi-bold main-transition hover:text-black"
                       title={title}
                       href={`/products/${id}`}
@@ -226,7 +239,14 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
                     </Link>
                   </li>
                 ))
-              : ""}
+              ) : (
+                <li className="w-full font-satoshi-bold text-black">
+                  No product found !
+                </li>
+              )
+            ) : (
+              <Loading textColor="black" />
+            )}
           </ul>
         </div>
 
@@ -240,7 +260,7 @@ export default function NavBar({ products, isLoggedin }: NavBarProps) {
 
           {isLoggedin && (
             <span className="absolute text-xs bg-red-500 rounded-full w-3.5 h-3.5 flex justify-center items-center text-white top-[-16%] right-[54%]">
-              {String(cart.length)}
+              {String(store.cart.length)}
             </span>
           )}
         </Link>

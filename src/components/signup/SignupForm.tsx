@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Modal from "../ui/Modal";
 import { useRouter } from "next/navigation";
+import Loading from "../ui/Loading";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
   });
@@ -97,10 +98,11 @@ export default function LoginForm() {
       </div>
 
       <button
-        className="bg-black text-white py-3 border rounded-xl main-transition hover:bg-bg-secondary hover:text-black"
+        className={`bg-black text-white py-3 border rounded-xl main-transition ${isSubmitting ? "cursor-not-allowed" : "hover:bg-bg-secondary hover:text-black"}`}
         type="submit"
+        disabled={isSubmitting}
       >
-        Create Account
+        {isSubmitting ? <Loading textColor="white" /> : "Create Account"}
       </button>
 
       <Modal

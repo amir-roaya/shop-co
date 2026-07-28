@@ -17,15 +17,19 @@ export const getProducts = async (): Promise<Product[]> => {
   return res.json();
 };
 
-export const getProduct = async (id: number): Promise<Product> => {
+export const getProduct = async (id: number): Promise<Product | null> => {
   if (!API_URL) {
     throw new Error("API_URL is not defined");
   }
 
   const res = await fetch(`${API_URL}/products/${id}`);
+
+  const text = await res.text();
+  if (!text) return null;
+
   if (!res.ok) {
-    throw new Error("Faild to fetch products");
+    throw new Error("Faild to fetch product");
   }
 
-  return res.json();
+  return JSON.parse(text) as Product;
 };

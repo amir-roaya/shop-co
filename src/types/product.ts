@@ -23,3 +23,26 @@ export type ProductsSearchParams = {
   sort: string;
   page: string;
 };
+
+export type Category =
+  | "All"
+  | "electronics"
+  | "Latest"
+  | "men's clothing"
+  | "women's clothing"
+  | "jewelery";
+
+export type Sort =
+  | "Most Popular"
+  | "Cheapest"
+  | "Latest"
+  | "Most Expensive"
+  | "All Sorts";
+
+export type ValidFilters = {
+  category: Category;
+  min: number;
+  max: number;
+  sort: Sort;
+  page: number;
+};

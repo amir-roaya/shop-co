@@ -5,20 +5,26 @@ import { LoginFormValues } from "@/validation/auth";
 import { cookies } from "next/headers";
 
 export const loginAction = async (data: LoginFormValues) => {
-  const userToken = await login(data.username, data.password);
+  const result = await login(data.username, data.password);
 
-  if (userToken) {
-    const cookieStore = await cookies();
-    cookieStore.set("token", userToken.token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      path: "/",
-      maxAge: 60 * 60 * 24 * 7,
-    });
-
+  if (!result.success) {
     return {
-      success: true,
+      success: false,
+      massage: result.massage,
     };
   }
+
+  const cookieStore = await cookies();
+  cookieStore.set("token", result.data.token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 7,
+  });
+
+  return {
+    success: true,
+    massage: "",
+  };
 };

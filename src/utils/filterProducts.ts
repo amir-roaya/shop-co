@@ -1,30 +1,23 @@
-import { Product, ProductsSearchParams } from "@/types/product";
+import { Product, ValidFilters } from "@/types/product";
 
 export const filterProducts = (
   products: Product[],
-  params: ProductsSearchParams,
+  validFilters: ValidFilters,
   itemPerPage: number,
 ) => {
   let filteredProducts = [...products];
-  const filters = {
-    category: params.category ?? "All",
-    min: Number(params.min ?? 0),
-    max: Number(params.max ?? 1000),
-    sort: params.sort ?? "All Sorts",
-    page: Number(params.page ?? 1),
-  };
 
-  if (filters.category !== "All") {
+  if (validFilters.category !== "All") {
     filteredProducts = filteredProducts.filter(
-      (p) => p.category === filters.category,
+      (p) => p.category === validFilters.category,
     );
   }
 
   filteredProducts = filteredProducts.filter(
-    (p) => p.price >= filters.min && p.price <= filters.max,
+    (p) => p.price >= validFilters.min && p.price <= validFilters.max,
   );
 
-  switch (filters.sort) {
+  switch (validFilters.sort) {
     case "Most Popular": {
       filteredProducts = filteredProducts.sort(
         (a, b) => b.rating.rate - a.rating.rate,
@@ -49,10 +42,7 @@ export const filterProducts = (
   }
 
   const totalPages = Math.ceil(filteredProducts.length / itemPerPage);
-  const currentPage = Math.min(
-    Math.max(filters.page, 1),
-    Math.max(totalPages, 1),
-  );
+  const currentPage = Math.min(validFilters.page, totalPages || 1);
 
   const start = (currentPage - 1) * itemPerPage;
   const paginatedProducts = filteredProducts.slice(start, start + itemPerPage);
