@@ -151,7 +151,7 @@ export default async function Home() {
           <div className="bg-bg-secondary pt-13 px-6 xl:px-8 rounded-2xl">
             <Reveal direction="up" delay={300}>
               <h3 className="font-integral-cf text-3xl text-center">
-                Browse by dress style
+                Browse by product category
               </h3>
             </Reveal>
 
@@ -159,26 +159,26 @@ export default async function Home() {
               <div className="grid gap-6 lg:gap-9 dress-grid justify-center md:dress-grid-desktop">
                 <Reveal direction="left" delay={500} className="flex">
                   <Link
-                    href={"/products?category=electronics"}
+                    href={"/products?category=beauty"}
                     className="relative h-60 xl:h-80 rounded-xl w-full overflow-hidden main-transition hover:scale-105"
                   >
-                    <div className="dress-section bg-[url(/images/electronics.jpeg)]"></div>
+                    <div className="dress-section bg-[url(/images/beauty.jfif)]"></div>
 
-                    <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
-                      Electronics
+                    <h6 className="absolute font-satoshi-bold text-2xl left-[32%] top-[6%] xl:text-4xl text-orange-600">
+                      Beauty
                     </h6>
                   </Link>
                 </Reveal>
 
                 <Reveal direction="left" delay={600} className="flex">
                   <Link
-                    href={"/products?category=women's clothing"}
+                    href={"/products?category=fragrances"}
                     className="relative h-60 xl:h-80 rounded-xl w-full overflow-hidden main-transition hover:scale-105"
                   >
-                    <div className="dress-section bg-[url(/images/womens.png)]"></div>
+                    <div className="dress-section bg-[url(/images/fragrances.jpg)]"></div>
 
-                    <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
-                      Women&apos;s clothing
+                    <h6 className="absolute font-satoshi-bold text-2xl left-[32%] top-[6%] xl:text-4xl text-black">
+                      Fragrances
                     </h6>
                   </Link>
                 </Reveal>
@@ -187,26 +187,26 @@ export default async function Home() {
               <div className="grid gap-6 lg:gap-9 dress-grid justify-center md:dress-grid-desktop-reverse">
                 <Reveal direction="right" delay={800} className="flex">
                   <Link
-                    href={"/products?category=men's clothing"}
+                    href={"/products?category=furniture"}
                     className="relative h-60 xl:h-80 rounded-xl w-full overflow-hidden main-transition hover:scale-105"
                   >
-                    <div className="dress-section bg-[url(/images/mens.png)]"></div>
+                    <div className="dress-section bg-[url(/images/furniture.jpg)]"></div>
 
-                    <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
-                      Men&apos;s clothing
+                    <h6 className="absolute font-satoshi-bold text-2xl left-[32%] top-[6%] xl:text-4xl text-yellow-600">
+                      Furniture
                     </h6>
                   </Link>
                 </Reveal>
 
                 <Reveal direction="right" delay={900} className="flex">
                   <Link
-                    href={"/products?category=jewelery"}
+                    href={"/products?category=groceries"}
                     className="relative h-60 xl:h-80 rounded-xl w-full overflow-hidden main-transition hover:scale-105"
                   >
-                    <div className="dress-section bg-[url(/images/jewelery.jpg)]"></div>
+                    <div className="dress-section bg-[url(/images/groceries.jfif)]"></div>
 
-                    <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
-                      Jewelery
+                    <h6 className="absolute font-satoshi-bold text-2xl left-[32%] top-[6%] xl:text-4xl text-white">
+                      Groceries
                     </h6>
                   </Link>
                 </Reveal>

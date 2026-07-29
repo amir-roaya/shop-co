@@ -36,7 +36,7 @@ export default function page() {
                 <p className="text-sm">
                   <span className="text-red-500 font-satoshi-bold">Note: </span>
                   <span className="text-text-secondary">
-                    This demo uses Fake Store API. Newly created accounts cant
+                    This demo uses Dummy Json API. Newly created accounts cant
                     be used to log in because the API doesnt persist users.
                   </span>
                 </p>

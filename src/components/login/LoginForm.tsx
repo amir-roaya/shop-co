@@ -30,7 +30,7 @@ export default function LoginForm() {
     const result = await loginAction(data);
 
     if (!result.success) {
-      setError("root", { message: result.massage });
+      setError("root", { message: result.message });
       return;
     }
 
@@ -123,7 +123,7 @@ export default function LoginForm() {
       <Modal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
-        massage="Success, redirecting to the home page..."
+        message="Success, redirecting to the home page..."
       />
     </form>
   );

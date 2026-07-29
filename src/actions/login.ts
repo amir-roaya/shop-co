@@ -10,12 +10,12 @@ export const loginAction = async (data: LoginFormValues) => {
   if (!result.success) {
     return {
       success: false,
-      massage: result.massage,
+      message: result.data.message,
     };
   }
 
   const cookieStore = await cookies();
-  cookieStore.set("token", result.data.token, {
+  cookieStore.set("token", result.data.accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -25,6 +25,6 @@ export const loginAction = async (data: LoginFormValues) => {
 
   return {
     success: true,
-    massage: "",
+    message: "",
   };
 };

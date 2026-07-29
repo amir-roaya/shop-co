@@ -11,7 +11,7 @@ export const signup = async (
     throw new Error("API_URL is not defined");
   }
 
-  const res = await fetch(`${API_URL}/users`, {
+  const res = await fetch(`${API_URL}/users/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, email, password }),
@@ -27,12 +27,14 @@ export const signup = async (
 type LoginService =
   | {
       success: false;
-      massage: string;
+      data: {
+        message: string;
+      };
     }
   | {
       success: true;
       data: {
-        token: string;
+        accessToken: string;
       };
     };
 
@@ -53,7 +55,7 @@ export const login = async (
   if (!res.ok) {
     return {
       success: false,
-      massage: await res.text(),
+      data: await res.json(),
     };
   }
 

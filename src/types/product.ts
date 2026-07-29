@@ -3,17 +3,9 @@ export type Product = {
   title: string;
   price: number;
   description: string;
-  image: string;
+  thumbnail: string;
   category: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
-};
-
-export type ProductCarouselProps = {
-  title: string;
-  products: Product[];
+  rating: number;
 };
 
 export type ProductsSearchParams = {
@@ -26,11 +18,10 @@ export type ProductsSearchParams = {
 
 export type Category =
   | "All"
-  | "electronics"
-  | "Latest"
-  | "men's clothing"
-  | "women's clothing"
-  | "jewelery";
+  | "beauty"
+  | "fragrances"
+  | "furniture"
+  | "groceries"
 
 export type Sort =
   | "Most Popular"

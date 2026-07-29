@@ -43,12 +43,12 @@ export default function page() {
                     <div className="flex items-center justify-between">
                       <Reveal direction="left" delay={1300}>
                         <p>
-                          Username:<span className="text-red-400"> johnd</span>
+                          Username:<span className="text-red-400"> emilys</span>
                         </p>
                       </Reveal>
 
                       <Reveal direction="up" delay={1350}>
-                        <CopyButton text="johnd" />
+                        <CopyButton text="emilys" />
                       </Reveal>
                     </div>
 
@@ -56,12 +56,12 @@ export default function page() {
                       <Reveal direction="left" delay={1450}>
                         <p>
                           Password:
-                          <span className="text-red-400"> m38rmF$</span>
+                          <span className="text-red-400"> emilyspass</span>
                         </p>
                       </Reveal>
 
                       <Reveal direction="up" delay={1500}>
-                        <CopyButton text="m38rmF$" />
+                        <CopyButton text="emilyspass" />
                       </Reveal>
                     </div>
                   </div>

@@ -13,14 +13,14 @@ export default function ShowProducts({ products }: ShowProductsProps) {
     <div className="py-6 grid products-grid gap-x-4 gap-y-4 justify-center lg:products-grid-desktop lg:gap-7">
       {products &&
         (products.length > 0 ? (
-          products.map(({ id, image, price, rating, title }, index) => (
+          products.map(({ id, price, rating, title,thumbnail }, index) => (
             <Reveal key={id} direction="right" delay={index * 200 + 200}>
               <div className="flex flex-col gap-1">
                 <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
                   <Image
                     width={180}
                     height={180}
-                    src={image}
+                    src={thumbnail}
                     alt="Product image"
                     className="max-h-full w-auto object-contain"
                   ></Image>
@@ -38,7 +38,7 @@ export default function ShowProducts({ products }: ShowProductsProps) {
                   <div>
                     <div
                       style={{
-                        width: getRatingWidth(rating.rate),
+                        width: getRatingWidth(rating),
                       }}
                       className="flex items-center gap-1 overflow-hidden"
                     >
@@ -75,7 +75,7 @@ export default function ShowProducts({ products }: ShowProductsProps) {
                   </div>
 
                   <div>
-                    <span>{rating.rate}/</span>
+                    <span>{rating}/</span>
                     <span className="text-text-secondary">5</span>
                   </div>
                 </div>

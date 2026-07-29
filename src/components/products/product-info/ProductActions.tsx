@@ -152,7 +152,7 @@ export default function ProductActions({
       <Modal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
-        massage="Added to cart successfully !"
+        message="Added to cart successfully !"
       />
     </>
   );

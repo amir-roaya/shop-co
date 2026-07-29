@@ -10,7 +10,7 @@ type ProductInfoProps = {
 };
 
 export default async function ProductInfo({ product }: ProductInfoProps) {
-  const { description, image, price, title, rating } = product;
+  const { description, thumbnail, price, title, rating } = product;
   const cookieStore = await cookies();
   const isLoggedin = !!cookieStore.get("token");
 
@@ -21,7 +21,7 @@ export default async function ProductInfo({ product }: ProductInfoProps) {
           <Image
             width={180}
             height={180}
-            src={image}
+            src={thumbnail}
             alt="Product image"
             className="max-h-full w-auto object-cover"
             loading="eager"
@@ -44,7 +44,7 @@ export default async function ProductInfo({ product }: ProductInfoProps) {
             <div>
               <div
                 style={{
-                  width: getRatingWidth(rating.rate),
+                  width: getRatingWidth(rating),
                 }}
                 className="flex items-center gap-1 overflow-hidden"
               >
@@ -83,7 +83,7 @@ export default async function ProductInfo({ product }: ProductInfoProps) {
 
           <Reveal direction="up" delay={900}>
             <div className="md:text-xl">
-              <span>{rating.rate}/</span>
+              <span>{rating}/</span>
               <span className="text-text-secondary">5</span>
             </div>
           </Reveal>

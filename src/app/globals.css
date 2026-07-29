@@ -29,9 +29,13 @@
 }
 
 @layer base {
+    html {
+        @apply overflow-x-clip
+    }
+
     body {
+        @apply overflow-x-clip;
         font-family: "Satoshi Regular";
-        overflow-x: clip;
     }
 
     svg {

@@ -20,7 +20,7 @@ export const filterProducts = (
   switch (validFilters.sort) {
     case "Most Popular": {
       filteredProducts = filteredProducts.sort(
-        (a, b) => b.rating.rate - a.rating.rate,
+        (a, b) => b.rating - a.rating,
       );
       break;
     }

@@ -2,11 +2,10 @@ import { Category, ProductsSearchParams, Sort } from "@/types/product";
 
 const categories: Category[] = [
   "All",
-  "Latest",
-  "electronics",
-  "jewelery",
-  "men's clothing",
-  "women's clothing",
+  "beauty",
+  "fragrances",
+  "furniture",
+  "groceries",
 ];
 
 const sorts: Sort[] = [
@@ -25,7 +24,7 @@ export const getValidFilters = (params: ProductsSearchParams) => {
     category:
       categories.find((category) => category === params.category) ?? "All",
     min: Number.isFinite(min) ? Math.max(0, min) : 0,
-    max: Number.isFinite(min) ? Math.min(1000, max) : 1000,
+    max: Number.isFinite(min) ? Math.min(800, max) : 800,
     sort: sorts.find((sort) => sort === params.sort) ?? "All Sorts",
     page: Math.max(1, Number(params.page ?? 1)),
   };

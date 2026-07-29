@@ -5,13 +5,13 @@ import { Dispatch, SetStateAction, useEffect } from "react";
 type ModalProps = {
   isModalOpen: boolean;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  massage: string;
+  message: string;
 };
 
 export default function Modal({
   isModalOpen,
   setIsModalOpen,
-  massage,
+  message,
 }: ModalProps) {
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Modal({
     <div
       className={`flex fixed w-72 h-0 bg-[rgb(85,85,85)] text-white font-satoshi-bold rounded-3xl justify-center items-center gap-2 bottom-[2%] inset-x-0 mx-auto z-130 opacity-0 overflow-clip main-transition ${isModalOpen ? "show-modal" : ""} p-3.5`}
     >
-      <span>{massage}</span>
+      <span>{message}</span>
 
       <div className=" rounded-full p-0.5 bg-green-600 text-white">
         <svg>

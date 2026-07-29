@@ -21,7 +21,7 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
   const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(true);
 
   const MIN = 0;
-  const MAX = 1000;
+  const MAX = 800;
 
   const [minPrice, setMinPrice] = useState(validFilters.min);
   const [maxPrice, setMaxPrice] = useState(validFilters.max);
@@ -116,13 +116,13 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
                   type="radio"
                   name={radioName}
                   className="hidden peer"
-                  value={"electronics"}
-                  checked={category === "electronics"}
+                  value={"beauty"}
+                  checked={category === "beauty"}
                   onChange={(e) => setCategory(e.target.value as Category)}
                 />
 
                 <span className="text-text-secondary peer-checked:font-extrabold main-transition">
-                  Electronics
+                  Beauty
                 </span>
 
                 <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -137,13 +137,13 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
                   type="radio"
                   name={radioName}
                   className="hidden peer"
-                  value={"men's clothing"}
-                  checked={category === "men's clothing"}
+                  value={"fragrances"}
+                  checked={category === "fragrances"}
                   onChange={(e) => setCategory(e.target.value as Category)}
                 />
 
                 <span className="text-text-secondary peer-checked:font-extrabold main-transition">
-                  Men&apos;s
+                  Fragrances
                 </span>
 
                 <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -158,13 +158,13 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
                   type="radio"
                   name={radioName}
                   className="hidden peer"
-                  value={"women's clothing"}
-                  checked={category === "women's clothing"}
+                  value={"furniture"}
+                  checked={category === "furniture"}
                   onChange={(e) => setCategory(e.target.value as Category)}
                 />
 
                 <span className="text-text-secondary peer-checked:font-extrabold main-transition">
-                  Women&apos;s
+                  Furniture
                 </span>
 
                 <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -179,13 +179,13 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
                   type="radio"
                   name={radioName}
                   className="hidden peer"
-                  value={"jewelery"}
-                  checked={category === "jewelery"}
+                  value={"groceries"}
+                  checked={category === "groceries"}
                   onChange={(e) => setCategory(e.target.value as Category)}
                 />
 
                 <span className="text-text-secondary peer-checked:font-extrabold main-transition">
-                  Jewelery
+                  Groceries
                 </span>
 
                 <span className="input-marker main-transition after:main-transition peer-checked:bg-[#003566] peer-checked:after:-translate-x-5"></span>
@@ -237,7 +237,7 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
               className={`price-input ${minPrice > maxPrice - 30 ? "z-20" : "z-10"}`}
               type="range"
               min={"0"}
-              max={"1000"}
+              max={"800"}
               value={minPrice}
               onChange={(e) => {
                 const value = Number(e.target.value);
@@ -248,7 +248,7 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
               className="price-input z-10"
               type="range"
               min={"0"}
-              max={"1000"}
+              max={"800"}
               value={maxPrice}
               onChange={(e) => {
                 const value = Number(e.target.value);

@@ -2,10 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type ProductCarouselProps } from "@/types/product";
 import { getRatingWidth } from "@/utils/ratinng";
 import { PointerEvent, useLayoutEffect, useRef } from "react";
 import Reveal from "../ui/Reveal";
+import { Product } from "@/types/product";
+
+type ProductCarouselProps = {
+  title: string;
+  products: Product[];
+};
 
 export default function ProductCarousel({
   title,
@@ -116,14 +121,14 @@ export default function ProductCarousel({
               <div ref={trackRef} className="flex gap-5">
                 <div ref={firstSetRef} className="flex gap-5">
                   {products.map(
-                    ({ id, image, price, rating, title }, index) => (
+                    ({ id, price, rating, title,thumbnail }, index) => (
                       <div
                         key={`${id}-${index}`}
                         className="flex flex-col gap-1.5 shrink-0 w-56 md:w-66 lg:w-78"
                       >
                         <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
                           <Image
-                            src={image}
+                            src={thumbnail}
                             width={180}
                             height={180}
                             alt="Product image"
@@ -143,7 +148,7 @@ export default function ProductCarousel({
                           <div>
                             <div
                               style={{
-                                width: getRatingWidth(rating.rate),
+                                width: getRatingWidth(rating),
                               }}
                               className="flex items-center gap-1 overflow-hidden"
                             >
@@ -180,7 +185,7 @@ export default function ProductCarousel({
                           </div>
 
                           <div>
-                            <span>{rating.rate}/</span>
+                            <span>{rating}/</span>
                             <span className="text-text-secondary">5</span>
                           </div>
                         </div>
@@ -193,14 +198,14 @@ export default function ProductCarousel({
 
                 <div className="flex gap-5">
                   {products.map(
-                    ({ id, image, price, rating, title }, index) => (
+                    ({ id, thumbnail, price, rating, title }, index) => (
                       <div
                         key={`${id}-${index}`}
                         className="flex flex-col gap-1.5 shrink-0 w-56 md:w-66 lg:w-78"
                       >
                         <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
                           <Image
-                            src={image}
+                            src={thumbnail}
                             width={180}
                             height={180}
                             alt="Product image"
@@ -220,7 +225,7 @@ export default function ProductCarousel({
                           <div>
                             <div
                               style={{
-                                width: getRatingWidth(rating.rate),
+                                width: getRatingWidth(rating),
                               }}
                               className="flex items-center gap-1 overflow-hidden"
                             >
@@ -257,7 +262,7 @@ export default function ProductCarousel({
                           </div>
 
                           <div>
-                            <span>{rating.rate}/</span>
+                            <span>{rating}/</span>
                             <span className="text-text-secondary">5</span>
                           </div>
                         </div>
@@ -270,14 +275,14 @@ export default function ProductCarousel({
 
                 <div className="flex gap-5">
                   {products.map(
-                    ({ id, image, price, rating, title }, index) => (
+                    ({ id, thumbnail, price, rating, title }, index) => (
                       <div
                         key={`${id}-${index}`}
                         className="flex flex-col gap-1.5 shrink-0 w-56 md:w-66 lg:w-78"
                       >
                         <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
                           <Image
-                            src={image}
+                            src={thumbnail}
                             width={180}
                             height={180}
                             alt="Product image"
@@ -297,7 +302,7 @@ export default function ProductCarousel({
                           <div>
                             <div
                               style={{
-                                width: getRatingWidth(rating.rate),
+                                width: getRatingWidth(rating),
                               }}
                               className="flex items-center gap-1 overflow-hidden"
                             >
@@ -334,7 +339,7 @@ export default function ProductCarousel({
                           </div>
 
                           <div>
-                            <span>{rating.rate}/</span>
+                            <span>{rating}/</span>
                             <span className="text-text-secondary">5</span>
                           </div>
                         </div>
@@ -360,12 +365,12 @@ export default function ProductCarousel({
       {products &&
         (products.length > 0 ? (
           <div className="hidden products-grid-desktop py-10 gap-5 xl:grid">
-            {products.map(({ id, image, price, rating, title }, index) => (
+            {products.map(({ id, thumbnail, price, rating, title }, index) => (
               <div key={`${id}-${index}`} className="flex flex-col gap-1.5">
                 <Reveal delay={500}>
                   <div className="bg-bg-secondary rounded-2xl flex items-center justify-center h-46 lg:h-57.5">
                     <Image
-                      src={image}
+                      src={thumbnail}
                       width={180}
                       height={180}
                       alt="Product image"
@@ -389,7 +394,7 @@ export default function ProductCarousel({
                     <div>
                       <div
                         style={{
-                          width: getRatingWidth(rating.rate),
+                          width: getRatingWidth(rating),
                         }}
                         className="flex items-center gap-1 overflow-hidden"
                       >
@@ -428,7 +433,7 @@ export default function ProductCarousel({
 
                   <Reveal direction="up" delay={700}>
                     <div>
-                      <span>{rating.rate}/</span>
+                      <span>{rating}/</span>
                       <span className="text-text-secondary">5</span>
                     </div>
                   </Reveal>

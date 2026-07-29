@@ -127,7 +127,7 @@ export default function SignupForm() {
       <Modal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
-        massage="Success, redirecting to the login page..."
+        message="Success, redirecting to the login page..."
       />
     </form>
   );

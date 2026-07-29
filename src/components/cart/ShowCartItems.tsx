@@ -12,14 +12,14 @@ export default function ShowCartItems() {
 
   return cart.length ? (
     <div className="flex flex-col border border-border-color-primary p-3 rounded-2xl gap-4 [&>*:not(:last-child)]:pb-4 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:border-border-color-primary h-fit [&>*:not(:last-child)]:shadow-line-shadow md:basis-[60%] shadow-main-shadow">
-      {cart.map(({ id, size, image, title, price, quantity }, index) => (
+      {cart.map(({ id, size, thumbnail, title, price, quantity }, index) => (
         <Reveal key={`${id}-${size}`} direction="up" delay={index * 200}>
           <div className="flex gap-2.5 xl:gap-4">
             <div className="w-1/3 xl:w-[22%] bg-bg-secondary overflow-hidden rounded-2xl flex items-center justify-center h-25 sm:h-40">
               <Image
                 width={100}
                 height={100}
-                src={image}
+                src={thumbnail}
                 alt="Product image"
                 className="max-h-full w-auto object-contain"
               ></Image>
