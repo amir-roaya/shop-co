@@ -1,5 +1,6 @@
 import ProductInfo from "@/components/products/product-info/ProductInfo";
 import ProductCarousel from "@/components/products/ProductCarousel";
+import Reveal from "@/components/ui/Reveal";
 import { getProduct, getProducts } from "@/services/products";
 import { getSameProducts } from "@/utils/getSameProducts";
 import { notFound } from "next/navigation";
@@ -23,7 +24,9 @@ export default async function page({
     <main>
       <section>
         <div className="container">
-          <div className="header-line"></div>
+          <Reveal delay={200}>
+            <div className="header-line"></div>
+          </Reveal>
 
           <ProductInfo product={mainProduct} />
         </div>

@@ -3,6 +3,7 @@
 import { ValidFilters } from "@/types/product";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
+import Reveal from "../ui/Reveal";
 
 type SortFilterProps = {
   radioName: string;
@@ -43,25 +44,27 @@ export default function SortFilter({
 
   return (
     <div className="relative" ref={sortRef}>
-      <button
-        onClick={() => setIsSortOpen(!isSortOpen)}
-        className="flex items-center gap-1 font-satoshi-bold w-full rounded-2xl p-2 main-transition hover:bg-black/90 hover:text-white"
-      >
-        <span title={selectedSort} className="md:w-16 truncate">
-          {selectedSort}
-        </span>
+      <Reveal direction="left" delay={900}>
+        <button
+          onClick={() => setIsSortOpen(!isSortOpen)}
+          className="flex items-center gap-1 font-satoshi-bold w-full rounded-2xl p-2 main-transition hover:bg-black/90 hover:text-white"
+        >
+          <span title={selectedSort} className="md:w-16 truncate">
+            {selectedSort}
+          </span>
 
-        <div>
-          <svg
-            className={`w-4 h-4 ${isSortOpen ? "rotate-180" : ""} main-transition`}
-          >
-            <use href="#chevron-down"></use>
-          </svg>
-        </div>
-      </button>
+          <div>
+            <svg
+              className={`w-4 h-4 ${isSortOpen ? "rotate-180" : ""} main-transition`}
+            >
+              <use href="#chevron-down"></use>
+            </svg>
+          </div>
+        </button>
+      </Reveal>
 
       <div
-        className={`sort-submenu main-transition ${isSortOpen ? "sort-submenu-show" : ""}`}
+        className={`sort-submenu main-transition ${isSortOpen ? "sort-submenu-show" : ""} z-20`}
       >
         <ul className="flex flex-col gap-4 w-full">
           <li>

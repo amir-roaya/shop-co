@@ -1,5 +1,6 @@
 import Comments from "@/components/home/Comments";
 import ProductCarousel from "@/components/products/ProductCarousel";
+import Reveal from "@/components/ui/Reveal";
 import { getProducts } from "@/services/products";
 import { getNewArrivals } from "@/utils/getNewArrivals";
 import { getTopSelling } from "@/utils/getTopSellings";
@@ -17,86 +18,118 @@ export default async function Home() {
         <div className="container">
           <div className="flex flex-col gap-2 md:flex-row">
             <div className="flex flex-col gap-6 md:w-[50%] lg:gap-8">
-              <h1 className="font-integral-cf text-4xl 2xl:text-5xl">
-                FIND CLOTHES THAT MATCHES YOUR STYLE
-              </h1>
+              <Reveal direction="up" delay={300}>
+                <h1 className="font-integral-cf text-4xl 2xl:text-5xl">
+                  FIND CLOTHES THAT MATCHES YOUR STYLE
+                </h1>
+              </Reveal>
 
-              <p className="text-text-secondary 2xl:text-xl">
-                Browse through our diverse range of meticulously crafted
-                garments, designed to bring out your individuality and cater to
-                your sense of style.
-              </p>
+              <Reveal direction="up" delay={500}>
+                <p className="text-text-secondary 2xl:text-xl">
+                  Browse through our diverse range of meticulously crafted
+                  garments, designed to bring out your individuality and cater
+                  to your sense of style.
+                </p>
+              </Reveal>
 
-              <Link
-                href={"/products"}
-                className="w-full py-3.5 text-center bg-black border text-white rounded-4xl md:w-[40%] main-transition hover:bg-white hover:text-black"
-              >
-                Shop Now
-              </Link>
+              <Reveal direction="up" delay={700} className="flex">
+                <Link
+                  href={"/products"}
+                  className="w-full py-3.5 text-center bg-black border text-white rounded-4xl md:w-[40%] main-transition hover:bg-white hover:text-black"
+                >
+                  Shop Now
+                </Link>
+              </Reveal>
 
               <div className="flex flex-wrap gap-x-2 gap-y-4 min-[480px]:gap-x-3 justify-center lg:justify-start">
-                <div className="flex flex-col px-2">
-                  <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
-                    200+
-                  </span>
-                  <span className="text-text-secondary text-xs md:text-sm">
-                    International Brands
-                  </span>
-                </div>
+                <Reveal direction="left" delay={900}>
+                  <div className="flex flex-col px-2">
+                    <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
+                      200+
+                    </span>
+                    <span className="text-text-secondary text-xs md:text-sm">
+                      International Brands
+                    </span>
+                  </div>
+                </Reveal>
 
-                <div className="line hidden min-[350px]:block"></div>
+                <Reveal delay={950}>
+                  <div className="line hidden min-[350px]:block"></div>
+                </Reveal>
 
-                <div className="flex flex-col px-2">
-                  <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
-                    2,000+
-                  </span>
-                  <span className="text-text-secondary text-xs md:text-sm">
-                    High-Quality Products
-                  </span>
-                </div>
+                <Reveal direction="left" delay={1000}>
+                  <div className="flex flex-col px-2">
+                    <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
+                      2,000+
+                    </span>
+                    <span className="text-text-secondary text-xs md:text-sm">
+                      High-Quality Products
+                    </span>
+                  </div>
+                </Reveal>
 
-                <div className="line hidden min-[445px]:block md:hidden lg:block"></div>
+                <Reveal delay={1150}>
+                  <div className="line hidden min-[445px]:block md:hidden lg:block"></div>
+                </Reveal>
 
-                <div className="flex flex-col px-2">
-                  <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
-                    30,000+
-                  </span>
-                  <span className="text-text-secondary text-xs md:text-sm">
-                    Happy Customers
-                  </span>
-                </div>
+                <Reveal direction="left" delay={1100}>
+                  <div className="flex flex-col px-2">
+                    <span className="font-satoshi-bold text-xl min-[480px]:text-2xl">
+                      30,000+
+                    </span>
+                    <span className="text-text-secondary text-xs md:text-sm">
+                      Happy Customers
+                    </span>
+                  </div>
+                </Reveal>
               </div>
             </div>
 
-            <div className="hero-secttion relative md:w-[50%]">
-              <div className="absolute right-[4%] min-[480px]:right-[14%] top-[1%] min-[480px]:top-[4%] md:right-[-2%] md:top-0">
-                <Image
-                  width={76}
-                  height={76}
-                  alt="Hero Shape"
-                  src={"/images/shape.png"}
-                ></Image>
-              </div>
+            <Reveal delay={100} className="md:w-[50%]">
+              <div className="hero-secttion relative">
+                <div className="absolute right-[4%] min-[480px]:right-[14%] top-[1%] min-[480px]:top-[4%] md:right-[-2%] md:top-0">
+                  <Image
+                    width={76}
+                    height={76}
+                    alt="Hero Shape"
+                    src={"/images/shape.png"}
+                  ></Image>
+                </div>
 
-              <div className="absolute left-[2%] min-[480px]:left-[10%] top-[34%] min-[480px]:top-[36%] md:left-[10%] md:top-[18%]">
-                <Image
-                  width={44}
-                  height={44}
-                  alt="Hero Shape"
-                  src={"/images/shape.png"}
-                ></Image>
+                <div className="absolute left-[2%] min-[480px]:left-[10%] top-[34%] min-[480px]:top-[36%] md:left-[10%] md:top-[18%]">
+                  <Image
+                    width={44}
+                    height={44}
+                    alt="Hero Shape"
+                    src={"/images/shape.png"}
+                  ></Image>
+                </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
 
         <div className="bg-black">
           <div className="container flex items-center flex-wrap justify-center gap-x-8 gap-y-3 text-white py-5 text-xl font-satoshi-bold md:text-2xl md:justify-evenly">
-            <p>VERSACE</p>
-            <p>ZARA</p>
-            <p>GUCCI</p>
-            <p>PRADA</p>
-            <p>CALVIN KLEIN</p>
+            <Reveal direction="right" delay={900}>
+              <p>VERSACE</p>
+            </Reveal>
+
+            <Reveal direction="right" delay={1000}>
+              <p>ZARA</p>
+            </Reveal>
+
+            <Reveal direction="right" delay={1100}>
+              <p>GUCCI</p>
+            </Reveal>
+
+            <Reveal direction="right" delay={1200}>
+              <p>PRADA</p>
+            </Reveal>
+
+            <Reveal direction="right" delay={1300}>
+              <p>CALVIN KLEIN</p>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -116,57 +149,67 @@ export default async function Home() {
       <section className="pt-12">
         <div className="container">
           <div className="bg-bg-secondary pt-13 px-6 xl:px-8 rounded-2xl">
-            <h3 className="font-integral-cf text-3xl text-center">
-              Browse by dress style
-            </h3>
+            <Reveal direction="up" delay={300}>
+              <h3 className="font-integral-cf text-3xl text-center">
+                Browse by dress style
+              </h3>
+            </Reveal>
 
-            <div className="py-7 space-y-5 xl:py-11">
-              <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop">
-                <Link
-                  href={"/products?category=electronics"}
-                  className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
-                >
-                  <div className="dress-section bg-[url(/images/electronics.jpeg)] main-transition hover:"></div>
+            <div className="py-7 space-y-5 lg:space-y-8 xl:py-11">
+              <div className="grid gap-6 lg:gap-9 dress-grid justify-center md:dress-grid-desktop">
+                <Reveal direction="left" delay={500} className="flex">
+                  <Link
+                    href={"/products?category=electronics"}
+                    className="relative h-60 xl:h-80 rounded-xl w-full overflow-hidden main-transition hover:scale-105"
+                  >
+                    <div className="dress-section bg-[url(/images/electronics.jpeg)]"></div>
 
-                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
-                    Electronics
-                  </h6>
-                </Link>
+                    <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
+                      Electronics
+                    </h6>
+                  </Link>
+                </Reveal>
 
-                <Link
-                  href={"/products?category=women's clothing"}
-                  className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
-                >
-                  <div className="dress-section bg-[url(/images/womens.png)]"></div>
+                <Reveal direction="left" delay={600} className="flex">
+                  <Link
+                    href={"/products?category=women's clothing"}
+                    className="relative h-60 xl:h-80 rounded-xl w-full overflow-hidden main-transition hover:scale-105"
+                  >
+                    <div className="dress-section bg-[url(/images/womens.png)]"></div>
 
-                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
-                    Women&apos;s clothing
-                  </h6>
-                </Link>
+                    <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
+                      Women&apos;s clothing
+                    </h6>
+                  </Link>
+                </Reveal>
               </div>
 
-              <div className="grid gap-6 dress-grid justify-center md:dress-grid-desktop-reverse">
-                <Link
-                  href={"/products?category=men's clothing"}
-                  className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
-                >
-                  <div className="dress-section bg-[url(/images/mens.png)]"></div>
+              <div className="grid gap-6 lg:gap-9 dress-grid justify-center md:dress-grid-desktop-reverse">
+                <Reveal direction="right" delay={800} className="flex">
+                  <Link
+                    href={"/products?category=men's clothing"}
+                    className="relative h-60 xl:h-80 rounded-xl w-full overflow-hidden main-transition hover:scale-105"
+                  >
+                    <div className="dress-section bg-[url(/images/mens.png)]"></div>
 
-                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
-                    Men&apos;s clothing
-                  </h6>
-                </Link>
+                    <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
+                      Men&apos;s clothing
+                    </h6>
+                  </Link>
+                </Reveal>
 
-                <Link
-                  href={"/products?category=jewelery"}
-                  className="relative h-60 xl:h-80 rounded-xl overflow-hidden main-transition hover:scale-105"
-                >
-                  <div className="dress-section bg-[url(/images/jewelery.jpg)]"></div>
+                <Reveal direction="right" delay={900} className="flex">
+                  <Link
+                    href={"/products?category=jewelery"}
+                    className="relative h-60 xl:h-80 rounded-xl w-full overflow-hidden main-transition hover:scale-105"
+                  >
+                    <div className="dress-section bg-[url(/images/jewelery.jpg)]"></div>
 
-                  <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
-                    Jewelery
-                  </h6>
-                </Link>
+                    <h6 className="absolute font-satoshi-bold text-xl left-[10%] top-[8%] xl:text-2xl">
+                      Jewelery
+                    </h6>
+                  </Link>
+                </Reveal>
               </div>
             </div>
           </div>

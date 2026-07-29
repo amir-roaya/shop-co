@@ -95,8 +95,8 @@
         @apply border-t border-border-color-primary mb-6 shadow-line-shadow;
     }
 
-    .login-hero {
-        @apply w-full h-125 rounded-lg overflow-hidden md:basis-[60%] md:h-180;
+    .form-hero {
+        @apply w-full h-125 rounded-lg overflow-hidden md:h-160;
         background: url("../../public/images/login-hero.png") center no-repeat;
         background-size: cover;
     }
@@ -161,7 +161,7 @@
     }
 
     .show-menu {
-        @apply translate-x-[116%] opacity-100 min-[480px]:translate-x-[122%];
+        @apply translate-x-[110%] opacity-100 min-[480px]:translate-x-[136%];
     }
 
     .show-search {
@@ -189,7 +189,7 @@
     }
 
     .show-dress-style {
-        @apply max-h-62 py-4 opacity-100;
+        @apply max-h-65 py-4 opacity-100;
     }
 
     .show-price-filter {
@@ -243,4 +243,36 @@
     100% {
         opacity: 0;
     }
+}
+
+.reveal {
+    @apply opacity-0;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    will-change: transform, opacity;
+    transition-delay: var(--delay, 0s);
+}
+
+.reveal-up {
+    transform: translateY(-40px);
+}
+
+.reveal-down {
+    transform: translateY(40px);
+}
+
+.reveal-left {
+    transform: translateX(-40px);
+}
+
+.reveal-right {
+    transform: translateX(40px);
+}
+
+.reveal-none {
+    transform: translate(0)
+}
+
+.show-reveal {
+    @apply opacity-100;
+    transform: translate(0, 0);
 }

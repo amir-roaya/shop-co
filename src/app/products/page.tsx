@@ -3,6 +3,7 @@ import MobileFilters from "@/components/products/MobileFilters";
 import Pagination from "@/components/products/Pagination";
 import ShowProducts from "@/components/products/ShowProducts";
 import SortFilter from "@/components/products/SortFilter";
+import Reveal from "@/components/ui/Reveal";
 import { getProducts } from "@/services/products";
 import { ProductsSearchParams } from "@/types/product";
 import { filterProducts } from "@/utils/filterProducts";
@@ -32,18 +33,24 @@ export default async function page({
     <main>
       <section>
         <div className="container">
-          <div className="header-line"></div>
+          <Reveal delay={200}>
+            <div className="header-line"></div>
+          </Reveal>
 
           <div className="flex gap-4">
-            <div className="hidden md:flex flex-col border border-border-color-primary rounded-2xl basis-[25%] py-4 px-2.5 h-138.5 shadow-main-shadow">
+            <div className="hidden md:flex flex-col border border-border-color-primary rounded-2xl basis-[25%] py-4 px-2.5 h-148 shadow-main-shadow">
               <div className="flex justify-between items-center pb-5">
-                <h5 className="font-satoshi-bold">Filters</h5>
+                <Reveal direction="left" delay={400}>
+                  <h5 className="font-satoshi-bold">Filters</h5>
+                </Reveal>
 
-                <div>
-                  <svg className="w-5 h-5 text-text-secondary">
-                    <use href="#filters"></use>
-                  </svg>
-                </div>
+                <Reveal direction="left" delay={450}>
+                  <div>
+                    <svg className="w-5 h-5 text-text-secondary">
+                      <use href="#filters"></use>
+                    </svg>
+                  </div>
+                </Reveal>
               </div>
 
               <Filters
@@ -54,23 +61,31 @@ export default async function page({
 
             <div className="basis-full md:basis-[75%]">
               <div className="flex items-center justify-between">
-                <h5 className="font-satoshi-bold text-2xl">Casual</h5>
+                <Reveal direction="left" delay={600} threshold={0.1}>
+                  <h5 className="font-satoshi-bold text-2xl">
+                    {validFilters.category}
+                  </h5>
+                </Reveal>
 
-                <p className="text-text-secondary hidden sm:block">
-                  {result.products.length > 0 ? (
-                    <span>
-                      Showing {String(startItem)}-{String(endItem)} of {""}
-                      {String(result.totalItems)} Products
-                    </span>
-                  ) : (
-                    ""
-                  )}
-                </p>
+                <Reveal direction="left" delay={700}>
+                  <p className="text-text-secondary hidden sm:block">
+                    {result.products.length > 0 ? (
+                      <span>
+                        Showing {String(startItem)}-{String(endItem)} of {""}
+                        {String(result.totalItems)} Products
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </p>
+                </Reveal>
 
                 <MobileFilters validFilters={validFilters} />
 
                 <div className="text-sm hidden md:flex gap-2 items-center">
-                  <span className="text-text-secondary">Sorted by:</span>
+                  <Reveal direction="left" delay={800}>
+                    <span className="text-text-secondary">Sorted by:</span>
+                  </Reveal>
 
                   <SortFilter
                     validFilters={validFilters}
@@ -80,6 +95,10 @@ export default async function page({
               </div>
 
               <ShowProducts products={result.products} />
+
+              <Reveal delay={600}>
+                <div className="border-b border-border-color-primary shadow-line-shadow"></div>
+              </Reveal>
 
               <Pagination
                 totalItems={result.totalItems}

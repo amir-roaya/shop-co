@@ -3,6 +3,7 @@
 import { fakeComments } from "@/lib/fakeComments";
 import { getRatingWidth } from "@/utils/ratinng";
 import { useEffect, useRef } from "react";
+import Reveal from "../ui/Reveal";
 
 export default function Comments() {
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -78,93 +79,101 @@ export default function Comments() {
   return (
     <>
       <div className="flex justify-between items-end">
-        <h3 className="font-integral-cf text-3xl">OUR HAPPY CUSTOMERS</h3>
+        <Reveal direction="left" delay={300}>
+          <h3 className="font-integral-cf text-3xl">OUR HAPPY CUSTOMERS</h3>
+        </Reveal>
 
         <div className="flex gap-3">
-          <button
-            onClick={handlePrev}
-            className="rounded-2xl p-0.5 main-transition hover:bg-black/70 hover:text-white"
-          >
-            <svg>
-              <use href="#arrow"></use>
-            </svg>
-          </button>
+          <Reveal direction="left" delay={600}>
+            <button
+              onClick={handlePrev}
+              className="rounded-2xl p-0.5 main-transition hover:bg-black/70 hover:text-white"
+            >
+              <svg>
+                <use href="#arrow"></use>
+              </svg>
+            </button>
+          </Reveal>
 
-          <button
-            onClick={handleNext}
-            className="rotate-180 rounded-2xl p-0.5 main-transition hover:bg-black/70 hover:text-white"
-          >
-            <svg>
-              <use href="#arrow"></use>
-            </svg>
-          </button>
+          <Reveal direction="left" delay={700}>
+            <button
+              onClick={handleNext}
+              className="rotate-180 rounded-2xl p-0.5 main-transition hover:bg-black/70 hover:text-white"
+            >
+              <svg>
+                <use href="#arrow"></use>
+              </svg>
+            </button>
+          </Reveal>
         </div>
       </div>
 
-      <div className="mt-7 overflow-x-hidden">
-        <div ref={trackRef} className="flex gap-4">
-          {[...fakeComments, ...fakeComments, ...fakeComments].map(
-            ({ id, rate, name, description }, index) => (
-              <div key={`${id}-${index}`} className="comment">
-                <div className="flex w-fit">
-                  <div
-                    style={{
-                      width: getRatingWidth(rate),
-                    }}
-                    className="flex items-center gap-1 overflow-hidden"
-                  >
-                    <div>
-                      <svg className="w-5 h-4.75">
-                        <use href="#star"></use>
-                      </svg>
-                    </div>
+      <Reveal delay={900} direction="up">
+        <div className="mt-7 overflow-x-hidden">
+          <div ref={trackRef} className="flex gap-4">
+            {[...fakeComments, ...fakeComments, ...fakeComments].map(
+              ({ id, rate, name, description }, index) => (
+                <div key={`${id}-${index}`} className="comment">
+                  <div className="flex w-fit">
+                    <div
+                      style={{
+                        width: getRatingWidth(rate),
+                      }}
+                      className="flex items-center gap-1 overflow-hidden"
+                    >
+                      <div>
+                        <svg className="w-5 h-4.75">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
 
-                    <div>
-                      <svg className="w-5 h-4.75">
-                        <use href="#star"></use>
-                      </svg>
-                    </div>
+                      <div>
+                        <svg className="w-5 h-4.75">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
 
-                    <div>
-                      <svg className="w-5 h-4.75">
-                        <use href="#star"></use>
-                      </svg>
-                    </div>
+                      <div>
+                        <svg className="w-5 h-4.75">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
 
-                    <div>
-                      <svg className="w-5 h-4.75">
-                        <use href="#star"></use>
-                      </svg>
-                    </div>
+                      <div>
+                        <svg className="w-5 h-4.75">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
 
-                    <div>
-                      <svg className="w-5 h-4.75">
-                        <use href="#star"></use>
-                      </svg>
+                      <div>
+                        <svg className="w-5 h-4.75">
+                          <use href="#star"></use>
+                        </svg>
+                      </div>
                     </div>
                   </div>
+
+                  <div className="flex items-center gap-2.5">
+                    <h6 title={name} className="font-satoshi-bold truncate">
+                      {name}
+                    </h6>
+
+                    <span className="bg-green-600 rounded-full p-0.5">
+                      <svg className="w-3.5 h-3.5 text-white">
+                        <use href="#check"></use>
+                      </svg>
+                    </span>
+                  </div>
+
+                  <p className="text-text-secondary text-sm lg:text-[16px]">
+                    {description}
+                  </p>
                 </div>
-
-                <div className="flex items-center gap-2.5">
-                  <h6 title={name} className="font-satoshi-bold truncate">
-                    {name}
-                  </h6>
-
-                  <span className="bg-green-600 rounded-full p-0.5">
-                    <svg className="w-3.5 h-3.5 text-white">
-                      <use href="#check"></use>
-                    </svg>
-                  </span>
-                </div>
-
-                <p className="text-text-secondary text-sm lg:text-[16px]">
-                  {description}
-                </p>
-              </div>
-            ),
-          )}
+              ),
+            )}
+          </div>
         </div>
-      </div>
+      </Reveal>
     </>
   );
 }
