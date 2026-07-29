@@ -2,17 +2,13 @@
 
 import { logoutAction } from "@/actions/logout";
 import { useCartStore } from "@/store/cartStore";
-import { useRouter } from "next/navigation";
 
 export default function LogoutButton() {
   const clearCart = useCartStore((state) => state.clearCart);
-  const router = useRouter();
 
   const handleLogout = async () => {
     await logoutAction();
-    router.push("/");
     clearCart();
-    router.refresh();
   };
 
   return (
