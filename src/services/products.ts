@@ -11,12 +11,16 @@ export const getProducts = async (): Promise<Product[]> => {
 
   const res = await fetch(`${API_URL}/products`);
   if (!res.ok) {
+    console.log({
+      status: res.status,
+      ok: res.ok,
+      url: `${API_URL}/products`,
+    });
     throw new Error("Faild to fetch products");
   }
 
   return res.json();
 };
-
 
 export const getProduct = async (id: number): Promise<Product | null> => {
   if (!API_URL) {
