@@ -8,6 +8,7 @@ type RevealProps = {
   direction?: "up" | "down" | "left" | "right" | "none";
   threshold?: number;
   className?: string;
+  requireScroll?: boolean;
 };
 
 export default function Reveal({
@@ -16,6 +17,7 @@ export default function Reveal({
   direction = "none",
   threshold = 0.25,
   className,
+  requireScroll,
 }: RevealProps) {
   const revealRef = useRef<HTMLDivElement | null>(null);
 
@@ -38,11 +40,24 @@ export default function Reveal({
       },
     );
 
-    observer.observe(element);
+    const handleScroll = () => {
+      observer.observe(element);
+    };
+
+    if (requireScroll) {
+      window.addEventListener("scroll", handleScroll, { once: true });
+    } else {
+      observer.observe(element);
+    }
+
     return () => {
       observer.disconnect();
+
+      if (requireScroll) {
+        window.addEventListener("scroll", handleScroll);
+      }
     };
-  }, [delay, threshold]);
+  }, [delay, threshold, requireScroll]);
 
   return (
     <div

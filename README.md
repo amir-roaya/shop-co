@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shop.co
 
-## Getting Started
+A modern e-commerce web application built with Next.js, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Features
 
-```bash
+- Responsive design
+- Product listing
+- Product details page
+- Category filtering
+- Price filtering
+- Product sorting
+- Search suggestions
+- Pagination
+- Authentication
+- Shopping cart
+- Persistent cart using Zustand
+- Reveal animations
+- Skeleton loading states
+- Error handling
+- Server Actions
+
+---
+
+## Tech Stack
+
+- Next.js 16.2.10 (App Router)
+- React 19.2.4
+- TypeScript
+- Tailwind CSS
+- Zustand
+- DummyJSON API
+
+---
+
+## Installation
+
+Clone the repository
+
+git clone https://github.com/amir-roaya/shop-co
+Go to the project directory
+
+cd shop-co
+
+Install dependencies
+
+npm install
+
+Create a .env.local
+
+API_URL=https://dummyjson.com
+
+NEXT_PUBLIC_API_URL=https://dummyjson.com
+
+Run development server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+npm run build
+npm start
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+- Home
+- Products
+- Product Details
+- Cart
+- Login
+- Signup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## State Management
 
-## Deploy on Vercel
+Zustand is used for:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Shopping cart
+- UI state
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## API
+
+This project uses:
+
+https://dummyjson.com
+
+---
+
+## Future Improvements
+
+- Wishlist
+- Order history
+- User profile
+- Payment integration
+- Product reviews
+- Admin dashboard
+
+---
+
+## Live Demo
+
+https://amir-roaya-shop-co.vercel.app/
+
+---
+
+## Author
+
+Amirhosein Aminroya
