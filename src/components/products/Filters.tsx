@@ -21,7 +21,7 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
   const [isPriceFilterOpen, setIsPriceFilterOpen] = useState(true);
 
   const MIN = 0;
-  const MAX = 800;
+  const MAX = 2500;
 
   const [minPrice, setMinPrice] = useState(validFilters.min);
   const [maxPrice, setMaxPrice] = useState(validFilters.max);
@@ -237,7 +237,7 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
               className={`price-input ${minPrice > maxPrice - 30 ? "z-20" : "z-10"}`}
               type="range"
               min={"0"}
-              max={"800"}
+              max={"2500"}
               value={minPrice}
               onChange={(e) => {
                 const value = Number(e.target.value);
@@ -248,7 +248,7 @@ export default function Filters({ radioName, validFilters }: FiltersProps) {
               className="price-input z-10"
               type="range"
               min={"0"}
-              max={"800"}
+              max={"2500"}
               value={maxPrice}
               onChange={(e) => {
                 const value = Number(e.target.value);
