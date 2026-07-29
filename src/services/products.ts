@@ -17,6 +17,7 @@ export const getProducts = async (): Promise<Product[]> => {
   return res.json();
 };
 
+
 export const getProduct = async (id: number): Promise<Product | null> => {
   if (!API_URL) {
     throw new Error("API_URL is not defined");
