@@ -114,7 +114,7 @@ export default function ProductCarousel({
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
-              className="py-10 overflow-x-hidden relative xl:hidden"
+              className="py-10 overflow-x-hidden relative xl:hidden touch-pan-y md:touch-auto"
             >
               <div className="absolute left-0 top-0 w-20 h-full pointer-events-none bg-linear-[to_right,white,transparent] z-10"></div>
 
