@@ -11,24 +11,13 @@ import LogoutButton from "./LogoutButton";
 import { usePathname } from "next/navigation";
 import Loading from "@/components/ui/Loading";
 import Reveal from "@/components/ui/Reveal";
-import { getClientProducts } from "@/services/productsClient";
 
 type NavBarProps = {
   isLoggedin: boolean;
+  products: Product[];
 };
 
-export default function NavBar({ isLoggedin }: NavBarProps) {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      const products = await getClientProducts();
-      setProducts(products);
-    };
-
-    loadProducts();
-  }, []);
-
+export default function NavBar({ products, isLoggedin }: NavBarProps) {
   const pathname = usePathname();
 
   const isMenuOpen = useMenuStore((state) => state.isMenuOpen);
